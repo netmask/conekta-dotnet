@@ -1,6 +1,7 @@
 using System;
 using System.Runtime.Serialization;
 using System.Text;
+using conekta.io.Api;
 using Newtonsoft.Json;
 
 namespace conekta.io.Resource
@@ -10,6 +11,14 @@ namespace conekta.io.Resource
     [DataContract]
     public class Card : IEquatable<Card>
     {
+        public Card Delete()
+        {
+            var api = new DefaultApi();           
+            var car =  api.CustomersCustomerIdCardsCardIdDelete(Customer.Id, this.Id);
+            Customer.Cards.Remove(this);
+            return car;
+        }
+
         /// <summary>
         ///     Initializes a new instance of the <see cref="Card" /> class.
         ///     Initializes a new instance of the <see cref="Card" />class.
@@ -37,6 +46,10 @@ namespace conekta.io.Resource
             this.Active = Active;
             this.Address = Address;
         }
+
+
+
+        public Customer Customer { get; set; }
 
 
         /// <summary>

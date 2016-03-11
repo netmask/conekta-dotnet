@@ -8,7 +8,7 @@ namespace conekta.io.Resource
     /// <summary>
     /// </summary>
     [DataContract]
-    public class TokenizedCard : IEquatable<TokenizedCard>
+    public class TokenizedCard : Card
     {
         /// <summary>
         ///     Initializes a new instance of the <see cref="TokenizedCard" /> class.

@@ -22,7 +22,7 @@ namespace conekta.io.Resource
         /// <param name="Customer">Customer.</param>
         /// <param name="LineItems">LineItems.</param>
         /// <param name="BillingAddress">BillingAddress.</param>
-        public Details(string Name = null, string Phone = null, string Email = null, Customer Customer = null,
+        public Details(string Name = null, string Phone = null, string Email = null, ChargeCustomerInfo Customer = null,
             List<LineItem> LineItems = null, BillingAddress BillingAddress = null)
         {
             this.Name = Name;
@@ -56,7 +56,7 @@ namespace conekta.io.Resource
         ///     Gets or Sets Customer
         /// </summary>
         [DataMember(Name = "customer", EmitDefaultValue = false)]
-        public Customer Customer { get; set; }
+        public ChargeCustomerInfo Customer { get; set; }
 
         /// <summary>
         ///     Gets or Sets LineItems

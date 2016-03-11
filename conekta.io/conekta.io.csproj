@@ -65,8 +65,8 @@
     <Compile Include="Resource\Cash.cs" />
     <Compile Include="Resource\Charge.cs" />
     <Compile Include="Resource\ChargeBank.cs" />
+    <Compile Include="Resource\ChargeCustomerInfo.cs" />
     <Compile Include="Resource\Customer.cs" />
-    <Compile Include="Resource\CustomerClient.cs" />
     <Compile Include="Resource\Details.cs" />
     <Compile Include="Resource\Error.cs" />
     <Compile Include="Resource\LineItem.cs" />

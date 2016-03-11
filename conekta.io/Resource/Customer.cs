@@ -1,7 +1,12 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using System.Runtime.Serialization;
 using System.Text;
+using conekta.io.Api;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace conekta.io.Resource
 {
@@ -10,63 +15,177 @@ namespace conekta.io.Resource
     [DataContract]
     public class Customer : IEquatable<Customer>
     {
-        /// <summary>
+
+        public static Customer Create(JObject customer)
+        {
+            var api = new DefaultApi();
+            return api.CustomersPost(customer.ToObject<BaseClient>());
+        }
+
+        public static Customer Find(String id)
+        {
+            var api = new DefaultApi();
+            return api.CustomersCustomerIdGet(id);
+        }
+
+        public void Update(JObject customer)
+        {           
+            var api = new DefaultApi();
+            this.LoadFromCustomer(api.CustomersCustomerIdPut(this.Id, customer.ToObject<BaseClient>()));
+        }
+
+        public void Delete()
+        {
+            var api = new DefaultApi();
+            LoadFromCustomer(api.CustomersCustomerIdDelete(this.Id));
+        }
+
+        public void CreateCard(JObject newCard)
+        {
+            var api = new DefaultApi();
+            var card = api.CustomersCustomerIdCardsPost(this.Id, newCard.ToObject<TokenObject>());
+            card.Customer = this;
+            this.Cards.Add(card);            
+        }
+
+        public void DeleteCard(Card card)
+        {
+            var api = new DefaultApi();
+            api.CustomersCustomerIdCardsCardIdDelete(this.Id, card.Id);
+            this.Cards.Remove(card);
+        }
+
+
+        /// <sumary>
         ///     Initializes a new instance of the <see cref="Customer" /> class.
         ///     Initializes a new instance of the <see cref="Customer" />class.
         /// </summary>
-        /// <param name="LoggedIn">LoggedIn.</param>
-        /// <param name="SuccessfulPurchases">SuccessfulPurchases.</param>
+        /// <param name="Id">Id.</param>
+        /// <param name="_Object">_Object.</param>
+        /// <param name="Livemode">Livemode.</param>
         /// <param name="CreatedAt">CreatedAt.</param>
-        /// <param name="UpdatedAt">UpdatedAt.</param>
-        /// <param name="OfflinePayments">OfflinePayments.</param>
-        /// <param name="Score">Score.</param>
-        public Customer(string LoggedIn = null, int? SuccessfulPurchases = null, int? CreatedAt = null,
-            int? UpdatedAt = null, int? OfflinePayments = null, int? Score = null)
+        /// <param name="Name">Name.</param>
+        /// <param name="Email">Email.</param>
+        /// <param name="Phone">Phone.</param>
+        /// <param name="DefaultCard">DefaultCard.</param>
+        /// <param name="BillingAddress">BillingAddress.</param>
+        /// <param name="ShippingAddress">ShippingAddress.</param>
+        /// <param name="Cards">Cards.</param>
+        /// <param name="Subscriptions">Subscriptions.</param>
+        public Customer(string Id = null, string _Object = null, string Livemode = null, string CreatedAt = null,
+            string Name = null, string Email = null, string Phone = null, string DefaultCard = null,
+            BillingAddress BillingAddress = null, BillingAddress ShippingAddress = null,
+            List<Card> Cards = null, List<Subscription> Subscriptions = null, bool Deleted = false)
         {
-            this.LoggedIn = LoggedIn;
-            this.SuccessfulPurchases = SuccessfulPurchases;
+            this.Id = Id;
+            this._Object = _Object;
+            this.Livemode = Livemode;
             this.CreatedAt = CreatedAt;
-            this.UpdatedAt = UpdatedAt;
-            this.OfflinePayments = OfflinePayments;
-            this.Score = Score;
+            this.Name = Name;
+            this.Email = Email;
+            this.Phone = Phone;
+            this.DefaultCard = DefaultCard;
+            this.BillingAddress = BillingAddress;
+            this.ShippingAddress = ShippingAddress;
+            this.Cards = Cards;
+            this.Subscriptions = Subscriptions;
+            this.Deleted = Deleted;
+            
+            foreach (var card in Cards)
+            {
+                card.Customer = this;
+            }
+        }
+
+        public void LoadFromCustomer(Customer customer)
+        {
+            this.Id = customer.Id;
+            this._Object = customer._Object;
+            this.Livemode = customer.Livemode;
+            this.CreatedAt = customer.CreatedAt;
+            this.Name = customer.Name;
+            this.Email = customer.Email;
+            this.Phone = customer.Phone;
+            this.DefaultCard = customer.DefaultCard;
+            this.Deleted = customer.Deleted;
+
         }
 
 
         /// <summary>
-        ///     Gets or Sets LoggedIn
+        ///     Gets or Sets Id
         /// </summary>
-        [DataMember(Name = "logged_in", EmitDefaultValue = false)]
-        public string LoggedIn { get; set; }
+        [DataMember(Name = "id", EmitDefaultValue = false)]
+        public string Id { get; set; }
+
+        [DataMember(Name = "deleted", EmitDefaultValue = false)]
+        public bool Deleted { get; set; }
 
         /// <summary>
-        ///     Gets or Sets SuccessfulPurchases
+        ///     Gets or Sets _Object
         /// </summary>
-        [DataMember(Name = "successful_purchases", EmitDefaultValue = false)]
-        public int? SuccessfulPurchases { get; set; }
+        [DataMember(Name = "object", EmitDefaultValue = false)]
+        public string _Object { get; set; }
+
+        /// <summary>
+        ///     Gets or Sets Livemode
+        /// </summary>
+        [DataMember(Name = "livemode", EmitDefaultValue = false)]
+        public string Livemode { get; set; }
 
         /// <summary>
         ///     Gets or Sets CreatedAt
         /// </summary>
         [DataMember(Name = "created_at", EmitDefaultValue = false)]
-        public int? CreatedAt { get; set; }
+        public string CreatedAt { get; set; }
 
         /// <summary>
-        ///     Gets or Sets UpdatedAt
+        ///     Gets or Sets Name
         /// </summary>
-        [DataMember(Name = "updated_at", EmitDefaultValue = false)]
-        public int? UpdatedAt { get; set; }
+        [DataMember(Name = "name", EmitDefaultValue = false)]
+        public string Name { get; set; }
 
         /// <summary>
-        ///     Gets or Sets OfflinePayments
+        ///     Gets or Sets Email
         /// </summary>
-        [DataMember(Name = "offline_payments", EmitDefaultValue = false)]
-        public int? OfflinePayments { get; set; }
+        [DataMember(Name = "email", EmitDefaultValue = false)]
+        public string Email { get; set; }
 
         /// <summary>
-        ///     Gets or Sets Score
+        ///     Gets or Sets Phone
         /// </summary>
-        [DataMember(Name = "score", EmitDefaultValue = false)]
-        public int? Score { get; set; }
+        [DataMember(Name = "phone", EmitDefaultValue = false)]
+        public string Phone { get; set; }
+
+        /// <summary>
+        ///     Gets or Sets DefaultCard
+        /// </summary>
+        [DataMember(Name = "default_card", EmitDefaultValue = false)]
+        public string DefaultCard { get; set; }
+
+        /// <summary>
+        ///     Gets or Sets BillingAddress
+        /// </summary>
+        [DataMember(Name = "billing_address", EmitDefaultValue = false)]
+        public BillingAddress BillingAddress { get; set; }
+
+        /// <summary>
+        ///     Gets or Sets ShippingAddress
+        /// </summary>
+        [DataMember(Name = "shipping_address", EmitDefaultValue = false)]
+        public BillingAddress ShippingAddress { get; set; }
+
+        /// <summary>
+        ///     Gets or Sets Cards
+        /// </summary>
+        [DataMember(Name = "cards", EmitDefaultValue = false)]
+        public List<Card> Cards { get; set; }
+
+        /// <summary>
+        ///     Gets or Sets Subscriptions
+        /// </summary>
+        [DataMember(Name = "subscriptions", EmitDefaultValue = false)]
+        public List<Subscription> Subscriptions { get; set; }
 
         /// <summary>
         ///     Returns true if Customer instances are equal
@@ -81,14 +200,19 @@ namespace conekta.io.Resource
 
             return
                 (
-                    LoggedIn == other.LoggedIn ||
-                    LoggedIn != null &&
-                    LoggedIn.Equals(other.LoggedIn)
+                    Id == other.Id ||
+                    Id != null &&
+                    Id.Equals(other.Id)
                     ) &&
                 (
-                    SuccessfulPurchases == other.SuccessfulPurchases ||
-                    SuccessfulPurchases != null &&
-                    SuccessfulPurchases.Equals(other.SuccessfulPurchases)
+                    _Object == other._Object ||
+                    _Object != null &&
+                    _Object.Equals(other._Object)
+                    ) &&
+                (
+                    Livemode == other.Livemode ||
+                    Livemode != null &&
+                    Livemode.Equals(other.Livemode)
                     ) &&
                 (
                     CreatedAt == other.CreatedAt ||
@@ -96,19 +220,44 @@ namespace conekta.io.Resource
                     CreatedAt.Equals(other.CreatedAt)
                     ) &&
                 (
-                    UpdatedAt == other.UpdatedAt ||
-                    UpdatedAt != null &&
-                    UpdatedAt.Equals(other.UpdatedAt)
+                    Name == other.Name ||
+                    Name != null &&
+                    Name.Equals(other.Name)
                     ) &&
                 (
-                    OfflinePayments == other.OfflinePayments ||
-                    OfflinePayments != null &&
-                    OfflinePayments.Equals(other.OfflinePayments)
+                    Email == other.Email ||
+                    Email != null &&
+                    Email.Equals(other.Email)
                     ) &&
                 (
-                    Score == other.Score ||
-                    Score != null &&
-                    Score.Equals(other.Score)
+                    Phone == other.Phone ||
+                    Phone != null &&
+                    Phone.Equals(other.Phone)
+                    ) &&
+                (
+                    DefaultCard == other.DefaultCard ||
+                    DefaultCard != null &&
+                    DefaultCard.Equals(other.DefaultCard)
+                    ) &&
+                (
+                    BillingAddress == other.BillingAddress ||
+                    BillingAddress != null &&
+                    BillingAddress.Equals(other.BillingAddress)
+                    ) &&
+                (
+                    ShippingAddress == other.ShippingAddress ||
+                    ShippingAddress != null &&
+                    ShippingAddress.Equals(other.ShippingAddress)
+                    ) &&
+                (
+                    Cards == other.Cards ||
+                    Cards != null &&
+                    Cards.SequenceEqual(other.Cards)
+                    ) &&
+                (
+                    Subscriptions == other.Subscriptions ||
+                    Subscriptions != null &&
+                    Subscriptions.SequenceEqual(other.Subscriptions)
                     );
         }
 
@@ -120,12 +269,19 @@ namespace conekta.io.Resource
         {
             var sb = new StringBuilder();
             sb.Append("class Customer {\n");
-            sb.Append("  LoggedIn: ").Append(LoggedIn).Append("\n");
-            sb.Append("  SuccessfulPurchases: ").Append(SuccessfulPurchases).Append("\n");
+            sb.Append("  Id: ").Append(Id).Append("\n");
+            sb.Append("  _Object: ").Append(_Object).Append("\n");
+            sb.Append("  Livemode: ").Append(Livemode).Append("\n");
             sb.Append("  CreatedAt: ").Append(CreatedAt).Append("\n");
-            sb.Append("  UpdatedAt: ").Append(UpdatedAt).Append("\n");
-            sb.Append("  OfflinePayments: ").Append(OfflinePayments).Append("\n");
-            sb.Append("  Score: ").Append(Score).Append("\n");
+            sb.Append("  Name: ").Append(Name).Append("\n");
+            sb.Append("  Email: ").Append(Email).Append("\n");
+            sb.Append("  Phone: ").Append(Phone).Append("\n");
+            sb.Append("  DefaultCard: ").Append(DefaultCard).Append("\n");
+            sb.Append("  BillingAddress: ").Append(BillingAddress).Append("\n");
+            sb.Append("  ShippingAddress: ").Append(ShippingAddress).Append("\n");
+            sb.Append("  Cards: ").Append(Cards).Append("\n");
+            sb.Append("  Subscriptions: ").Append(Subscriptions).Append("\n");
+            sb.Append("  Deleted: ").Append(Deleted).Append("\n");
 
             sb.Append("}\n");
             return sb.ToString();
@@ -163,23 +319,41 @@ namespace conekta.io.Resource
                 var hash = 41;
                 // Suitable nullity checks etc, of course :)
 
-                if (LoggedIn != null)
-                    hash = hash*59 + LoggedIn.GetHashCode();
+                if (Id != null)
+                    hash = hash*59 + Id.GetHashCode();
 
-                if (SuccessfulPurchases != null)
-                    hash = hash*59 + SuccessfulPurchases.GetHashCode();
+                if (_Object != null)
+                    hash = hash*59 + _Object.GetHashCode();
+
+                if (Livemode != null)
+                    hash = hash*59 + Livemode.GetHashCode();
 
                 if (CreatedAt != null)
                     hash = hash*59 + CreatedAt.GetHashCode();
 
-                if (UpdatedAt != null)
-                    hash = hash*59 + UpdatedAt.GetHashCode();
+                if (Name != null)
+                    hash = hash*59 + Name.GetHashCode();
 
-                if (OfflinePayments != null)
-                    hash = hash*59 + OfflinePayments.GetHashCode();
+                if (Email != null)
+                    hash = hash*59 + Email.GetHashCode();
 
-                if (Score != null)
-                    hash = hash*59 + Score.GetHashCode();
+                if (Phone != null)
+                    hash = hash*59 + Phone.GetHashCode();
+
+                if (DefaultCard != null)
+                    hash = hash*59 + DefaultCard.GetHashCode();
+
+                if (BillingAddress != null)
+                    hash = hash*59 + BillingAddress.GetHashCode();
+
+                if (ShippingAddress != null)
+                    hash = hash*59 + ShippingAddress.GetHashCode();
+
+                if (Cards != null)
+                    hash = hash*59 + Cards.GetHashCode();
+
+                if (Subscriptions != null)
+                    hash = hash*59 + Subscriptions.GetHashCode();
 
                 return hash;
             }

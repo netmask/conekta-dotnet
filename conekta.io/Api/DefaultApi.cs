@@ -15,6 +15,10 @@ namespace conekta.io.Api
     {
         #region Synchronous Operations
 
+        Customer CustomersCustomerIdPut(string customerId, BaseClient client);
+
+        Card CustomersCustomerIdCardsCardIdDelete(string customerId, string cardId);
+
         /// <summary>
         /// 
         /// </summary>
@@ -133,8 +137,8 @@ namespace conekta.io.Api
         /// </remarks>
         /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="client"></param>
-        /// <returns>CustomerClient</returns>
-        CustomerClient CustomersPost(BaseClient client);
+        /// <returns>Customer</returns>
+        Customer CustomersPost(BaseClient client);
 
         /// <summary>
         /// 
@@ -144,8 +148,8 @@ namespace conekta.io.Api
         /// </remarks>
         /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="client"></param>
-        /// <returns>ApiResponse of CustomerClient</returns>
-        ApiResponse<CustomerClient> CustomersPostWithHttpInfo(BaseClient client);
+        /// <returns>ApiResponse of Customer</returns>
+        ApiResponse<Customer> CustomersPostWithHttpInfo(BaseClient client);
 
         /// <summary>
         /// 
@@ -221,8 +225,8 @@ namespace conekta.io.Api
         /// </remarks>
         /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="customerId"></param>
-        /// <returns>CustomerClient</returns>
-        CustomerClient CustomersCustomerIdPut(string customerId);
+        /// <returns>Customer</returns>
+        Customer CustomersCustomerIdPut(string customerId);
 
         /// <summary>
         /// 
@@ -232,8 +236,8 @@ namespace conekta.io.Api
         /// </remarks>
         /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="customerId"></param>
-        /// <returns>ApiResponse of CustomerClient</returns>
-        ApiResponse<CustomerClient> CustomersCustomerIdPutWithHttpInfo(string customerId);
+        /// <returns>ApiResponse of Customer</returns>
+        ApiResponse<Customer> CustomersCustomerIdPutWithHttpInfo(string customerId);
 
         /// <summary>
         /// 
@@ -243,8 +247,8 @@ namespace conekta.io.Api
         /// </remarks>
         /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="customerId"></param>
-        /// <returns>CustomerClient</returns>
-        CustomerClient CustomersCustomerIdDelete(string customerId);
+        /// <returns>Customer</returns>
+        Customer CustomersCustomerIdDelete(string customerId);
 
         /// <summary>
         /// 
@@ -254,8 +258,8 @@ namespace conekta.io.Api
         /// </remarks>
         /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="customerId"></param>
-        /// <returns>ApiResponse of CustomerClient</returns>
-        ApiResponse<CustomerClient> CustomersCustomerIdDeleteWithHttpInfo(string customerId);
+        /// <returns>ApiResponse of Customer</returns>
+        ApiResponse<Customer> CustomersCustomerIdDeleteWithHttpInfo(string customerId);
 
         /// <summary>
         /// 
@@ -541,8 +545,8 @@ namespace conekta.io.Api
         /// </remarks>
         /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="client"></param>
-        /// <returns>Task of CustomerClient</returns>
-        System.Threading.Tasks.Task<CustomerClient> CustomersPostAsync(BaseClient client);
+        /// <returns>Task of Customer</returns>
+        System.Threading.Tasks.Task<Customer> CustomersPostAsync(BaseClient client);
 
         /// <summary>
         /// 
@@ -552,8 +556,8 @@ namespace conekta.io.Api
         /// </remarks>
         /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="client"></param>
-        /// <returns>Task of ApiResponse (CustomerClient)</returns>
-        System.Threading.Tasks.Task<ApiResponse<CustomerClient>> CustomersPostAsyncWithHttpInfo(BaseClient client);
+        /// <returns>Task of ApiResponse (Customer)</returns>
+        System.Threading.Tasks.Task<ApiResponse<Customer>> CustomersPostAsyncWithHttpInfo(BaseClient client);
 
         /// <summary>
         /// 
@@ -629,8 +633,8 @@ namespace conekta.io.Api
         /// </remarks>
         /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="customerId"></param>
-        /// <returns>Task of CustomerClient</returns>
-        System.Threading.Tasks.Task<CustomerClient> CustomersCustomerIdPutAsync(string customerId);
+        /// <returns>Task of Customer</returns>
+        System.Threading.Tasks.Task<Customer> CustomersCustomerIdPutAsync(string customerId);
 
         /// <summary>
         /// 
@@ -640,8 +644,8 @@ namespace conekta.io.Api
         /// </remarks>
         /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="customerId"></param>
-        /// <returns>Task of ApiResponse (CustomerClient)</returns>
-        System.Threading.Tasks.Task<ApiResponse<CustomerClient>> CustomersCustomerIdPutAsyncWithHttpInfo(string customerId);
+        /// <returns>Task of ApiResponse (Customer)</returns>
+        System.Threading.Tasks.Task<ApiResponse<Customer>> CustomersCustomerIdPutAsyncWithHttpInfo(string customerId);
 
         /// <summary>
         /// 
@@ -651,8 +655,8 @@ namespace conekta.io.Api
         /// </remarks>
         /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="customerId"></param>
-        /// <returns>Task of CustomerClient</returns>
-        System.Threading.Tasks.Task<CustomerClient> CustomersCustomerIdDeleteAsync(string customerId);
+        /// <returns>Task of Customer</returns>
+        System.Threading.Tasks.Task<Customer> CustomersCustomerIdDeleteAsync(string customerId);
 
         /// <summary>
         /// 
@@ -662,8 +666,8 @@ namespace conekta.io.Api
         /// </remarks>
         /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="customerId"></param>
-        /// <returns>Task of ApiResponse (CustomerClient)</returns>
-        System.Threading.Tasks.Task<ApiResponse<CustomerClient>> CustomersCustomerIdDeleteAsyncWithHttpInfo(string customerId);
+        /// <returns>Task of ApiResponse (Customer)</returns>
+        System.Threading.Tasks.Task<ApiResponse<Customer>> CustomersCustomerIdDeleteAsyncWithHttpInfo(string customerId);
 
         /// <summary>
         /// 
@@ -908,6 +912,105 @@ namespace conekta.io.Api
 
 
         /// <summary>
+        ///  captures an payment
+        /// </summary>
+        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="customerId"></param> 
+        /// <param name="client"></param> 
+        /// <returns>Customer</returns>
+        public Customer CustomersCustomerIdPut(string customerId, BaseClient client)
+        {
+            ApiResponse<Customer> localVarResponse = CustomersCustomerIdPutWithHttpInfo(customerId, client);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        ///  captures an payment
+        /// </summary>
+        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="customerId"></param> 
+        /// <param name="client"></param> 
+        /// <returns>ApiResponse of Customer</returns>
+        public ApiResponse<Customer> CustomersCustomerIdPutWithHttpInfo(string customerId, BaseClient client)
+        {
+
+            // verify the required parameter 'customerId' is set
+            if (customerId == null)
+                throw new ApiException(400, "Missing required parameter 'customerId' when calling DefaultApi->CustomersCustomerIdPut");
+
+            // verify the required parameter 'client' is set
+            if (client == null)
+                throw new ApiException(400, "Missing required parameter 'client' when calling DefaultApi->CustomersCustomerIdPut");
+
+
+            var localVarPath = "/customers/{customer_id}";
+
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new Dictionary<String, String>();
+            var localVarHeaderParams = new Dictionary<String, String>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+
+            };
+            String localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+
+            };
+            String localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null)
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+            // set "format" to json by default
+            // e.g. /pet/{petId}.{format} becomes /pet/{petId}.json
+            localVarPathParams.Add("format", "json");
+            if (customerId != null) localVarPathParams.Add("customer_id", Configuration.ApiClient.ParameterToString(customerId)); // path parameter
+
+
+
+
+            if (client.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = Configuration.ApiClient.Serialize(client); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = client; // byte array
+            }
+
+            // authentication (conekta_api_key) required
+
+            // http basic authentication required
+            if (!String.IsNullOrEmpty(Configuration.Username) || !String.IsNullOrEmpty(Configuration.Password))
+            {
+                localVarHeaderParams["Authorization"] = "Basic " + Base64Encode(Configuration.Username + ":" + Configuration.Password);
+            }
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse)Configuration.ApiClient.CallApi(localVarPath,
+                Method.PUT, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int)localVarResponse.StatusCode;
+
+            if (localVarStatusCode >= 400)
+                throw new ApiException(localVarStatusCode, "Error calling CustomersCustomerIdPut: " + localVarResponse.Content, localVarResponse.Content);
+            else if (localVarStatusCode == 0)
+                throw new ApiException(localVarStatusCode, "Error calling CustomersCustomerIdPut: " + localVarResponse.ErrorMessage, localVarResponse.ErrorMessage);
+
+            return new ApiResponse<Customer>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (Customer)Configuration.ApiClient.Deserialize(localVarResponse, typeof(Customer)));
+
+        }
+
+        /// <summary>
         ///  
         /// </summary>
         /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
@@ -1082,7 +1185,7 @@ namespace conekta.io.Api
 
         /// <summary>
         /// Create a Charge 
-        /// </summary>
+        /// </summary>f
         /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body">Charge object</param> 
         /// <returns>ApiResponse of Charge</returns>
@@ -1795,10 +1898,10 @@ namespace conekta.io.Api
         /// </summary>
         /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="client"></param> 
-        /// <returns>CustomerClient</returns>
-        public CustomerClient CustomersPost(BaseClient client)
+        /// <returns>Customer</returns>
+        public Customer CustomersPost(BaseClient client)
         {
-            ApiResponse<CustomerClient> localVarResponse = CustomersPostWithHttpInfo(client);
+            ApiResponse<Customer> localVarResponse = CustomersPostWithHttpInfo(client);
             return localVarResponse.Data;
         }
 
@@ -1807,8 +1910,8 @@ namespace conekta.io.Api
         /// </summary>
         /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="client"></param> 
-        /// <returns>ApiResponse of CustomerClient</returns>
-        public ApiResponse<CustomerClient> CustomersPostWithHttpInfo(BaseClient client)
+        /// <returns>ApiResponse of Customer</returns>
+        public ApiResponse<Customer> CustomersPostWithHttpInfo(BaseClient client)
         {
 
             // verify the required parameter 'client' is set
@@ -1876,9 +1979,9 @@ namespace conekta.io.Api
             else if (localVarStatusCode == 0)
                 throw new ApiException(localVarStatusCode, "Error calling CustomersPost: " + localVarResponse.ErrorMessage, localVarResponse.ErrorMessage);
 
-            return new ApiResponse<CustomerClient>(localVarStatusCode,
+            return new ApiResponse<Customer>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (CustomerClient)Configuration.ApiClient.Deserialize(localVarResponse, typeof(CustomerClient)));
+                (Customer)Configuration.ApiClient.Deserialize(localVarResponse, typeof(Customer)));
 
         }
 
@@ -1888,10 +1991,10 @@ namespace conekta.io.Api
         /// </summary>
         /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="client"></param>
-        /// <returns>Task of CustomerClient</returns>
-        public async System.Threading.Tasks.Task<CustomerClient> CustomersPostAsync(BaseClient client)
+        /// <returns>Task of Customer</returns>
+        public async System.Threading.Tasks.Task<Customer> CustomersPostAsync(BaseClient client)
         {
-            ApiResponse<CustomerClient> localVarResponse = await CustomersPostAsyncWithHttpInfo(client);
+            ApiResponse<Customer> localVarResponse = await CustomersPostAsyncWithHttpInfo(client);
             return localVarResponse.Data;
 
         }
@@ -1901,8 +2004,8 @@ namespace conekta.io.Api
         /// </summary>
         /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="client"></param>
-        /// <returns>Task of ApiResponse (CustomerClient)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<CustomerClient>> CustomersPostAsyncWithHttpInfo(BaseClient client)
+        /// <returns>Task of ApiResponse (Customer)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<Customer>> CustomersPostAsyncWithHttpInfo(BaseClient client)
         {
             // verify the required parameter 'client' is set
             if (client == null) throw new ApiException(400, "Missing required parameter 'client' when calling CustomersPost");
@@ -1969,9 +2072,9 @@ namespace conekta.io.Api
             else if (localVarStatusCode == 0)
                 throw new ApiException(localVarStatusCode, "Error calling CustomersPost: " + localVarResponse.ErrorMessage, localVarResponse.ErrorMessage);
 
-            return new ApiResponse<CustomerClient>(localVarStatusCode,
+            return new ApiResponse<Customer>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (CustomerClient)Configuration.ApiClient.Deserialize(localVarResponse, typeof(CustomerClient)));
+                (Customer)Configuration.ApiClient.Deserialize(localVarResponse, typeof(Customer)));
 
         }
 
@@ -2518,15 +2621,23 @@ namespace conekta.io.Api
 
         }
 
+
         /// <summary>
         ///  captures an payment
         /// </summary>
         /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="customerId"></param> 
-        /// <returns>CustomerClient</returns>
-        public CustomerClient CustomersCustomerIdPut(string customerId)
+        /// <returns>Customer</returns>
+        public Customer CustomersCustomerIdPut(string customerId)
         {
-            ApiResponse<CustomerClient> localVarResponse = CustomersCustomerIdPutWithHttpInfo(customerId);
+            ApiResponse<Customer> localVarResponse = CustomersCustomerIdPutWithHttpInfo(customerId);
+            return localVarResponse.Data;
+        }
+
+
+        public Customer CustomersCustomerIdGet(string customerId)
+        {
+            ApiResponse<Customer> localVarResponse = CustomersCustomerIdGetWithHttpInfo(customerId);
             return localVarResponse.Data;
         }
 
@@ -2535,8 +2646,83 @@ namespace conekta.io.Api
         /// </summary>
         /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="customerId"></param> 
-        /// <returns>ApiResponse of CustomerClient</returns>
-        public ApiResponse<CustomerClient> CustomersCustomerIdPutWithHttpInfo(string customerId)
+        /// <returns>ApiResponse of Customer</returns>
+        public ApiResponse<Customer> CustomersCustomerIdGetWithHttpInfo(string customerId)
+        {
+
+            // verify the required parameter 'customerId' is set
+            if (customerId == null)
+                throw new ApiException(400, "Missing required parameter 'customerId' when calling DefaultApi->CustomersCustomerIdPut");
+
+
+            var localVarPath = "/customers/{customer_id}";
+
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new Dictionary<String, String>();
+            var localVarHeaderParams = new Dictionary<String, String>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+
+            };
+            String localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+
+            };
+            String localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null)
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+            // set "format" to json by default
+            // e.g. /pet/{petId}.{format} becomes /pet/{petId}.json
+            localVarPathParams.Add("format", "json");
+            if (customerId != null) localVarPathParams.Add("customer_id", Configuration.ApiClient.ParameterToString(customerId)); // path parameter
+
+
+
+
+
+
+            // authentication (conekta_api_key) required
+
+            // http basic authentication required
+            if (!String.IsNullOrEmpty(Configuration.Username) || !String.IsNullOrEmpty(Configuration.Password))
+            {
+                localVarHeaderParams["Authorization"] = "Basic " + Base64Encode(Configuration.Username + ":" + Configuration.Password);
+            }
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse)Configuration.ApiClient.CallApi(localVarPath,
+                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int)localVarResponse.StatusCode;
+
+            if (localVarStatusCode >= 400)
+                throw new ApiException(localVarStatusCode, "Error calling CustomersCustomerIdPut: " + localVarResponse.Content, localVarResponse.Content);
+            else if (localVarStatusCode == 0)
+                throw new ApiException(localVarStatusCode, "Error calling CustomersCustomerIdPut: " + localVarResponse.ErrorMessage, localVarResponse.ErrorMessage);
+
+            return new ApiResponse<Customer>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (Customer)Configuration.ApiClient.Deserialize(localVarResponse, typeof(Customer)));
+
+        }
+
+
+        /// <summary>
+        ///  captures an payment
+        /// </summary>
+        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="customerId"></param> 
+        /// <returns>ApiResponse of Customer</returns>
+        public ApiResponse<Customer> CustomersCustomerIdPutWithHttpInfo(string customerId)
         {
 
             // verify the required parameter 'customerId' is set
@@ -2598,9 +2784,9 @@ namespace conekta.io.Api
             else if (localVarStatusCode == 0)
                 throw new ApiException(localVarStatusCode, "Error calling CustomersCustomerIdPut: " + localVarResponse.ErrorMessage, localVarResponse.ErrorMessage);
 
-            return new ApiResponse<CustomerClient>(localVarStatusCode,
+            return new ApiResponse<Customer>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (CustomerClient)Configuration.ApiClient.Deserialize(localVarResponse, typeof(CustomerClient)));
+                (Customer)Configuration.ApiClient.Deserialize(localVarResponse, typeof(Customer)));
 
         }
 
@@ -2610,10 +2796,10 @@ namespace conekta.io.Api
         /// </summary>
         /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="customerId"></param>
-        /// <returns>Task of CustomerClient</returns>
-        public async System.Threading.Tasks.Task<CustomerClient> CustomersCustomerIdPutAsync(string customerId)
+        /// <returns>Task of Customer</returns>
+        public async System.Threading.Tasks.Task<Customer> CustomersCustomerIdPutAsync(string customerId)
         {
-            ApiResponse<CustomerClient> localVarResponse = await CustomersCustomerIdPutAsyncWithHttpInfo(customerId);
+            ApiResponse<Customer> localVarResponse = await CustomersCustomerIdPutAsyncWithHttpInfo(customerId);
             return localVarResponse.Data;
 
         }
@@ -2623,8 +2809,8 @@ namespace conekta.io.Api
         /// </summary>
         /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="customerId"></param>
-        /// <returns>Task of ApiResponse (CustomerClient)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<CustomerClient>> CustomersCustomerIdPutAsyncWithHttpInfo(string customerId)
+        /// <returns>Task of ApiResponse (Customer)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<Customer>> CustomersCustomerIdPutAsyncWithHttpInfo(string customerId)
         {
             // verify the required parameter 'customerId' is set
             if (customerId == null) throw new ApiException(400, "Missing required parameter 'customerId' when calling CustomersCustomerIdPut");
@@ -2685,9 +2871,9 @@ namespace conekta.io.Api
             else if (localVarStatusCode == 0)
                 throw new ApiException(localVarStatusCode, "Error calling CustomersCustomerIdPut: " + localVarResponse.ErrorMessage, localVarResponse.ErrorMessage);
 
-            return new ApiResponse<CustomerClient>(localVarStatusCode,
+            return new ApiResponse<Customer>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (CustomerClient)Configuration.ApiClient.Deserialize(localVarResponse, typeof(CustomerClient)));
+                (Customer)Configuration.ApiClient.Deserialize(localVarResponse, typeof(Customer)));
 
         }
 
@@ -2696,10 +2882,10 @@ namespace conekta.io.Api
         /// </summary>
         /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="customerId"></param> 
-        /// <returns>CustomerClient</returns>
-        public CustomerClient CustomersCustomerIdDelete(string customerId)
+        /// <returns>Customer</returns>
+        public Customer CustomersCustomerIdDelete(string customerId)
         {
-            ApiResponse<CustomerClient> localVarResponse = CustomersCustomerIdDeleteWithHttpInfo(customerId);
+            ApiResponse<Customer> localVarResponse = CustomersCustomerIdDeleteWithHttpInfo(customerId);
             return localVarResponse.Data;
         }
 
@@ -2708,8 +2894,8 @@ namespace conekta.io.Api
         /// </summary>
         /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="customerId"></param> 
-        /// <returns>ApiResponse of CustomerClient</returns>
-        public ApiResponse<CustomerClient> CustomersCustomerIdDeleteWithHttpInfo(string customerId)
+        /// <returns>ApiResponse of Customer</returns>
+        public ApiResponse<Customer> CustomersCustomerIdDeleteWithHttpInfo(string customerId)
         {
 
             // verify the required parameter 'customerId' is set
@@ -2771,9 +2957,9 @@ namespace conekta.io.Api
             else if (localVarStatusCode == 0)
                 throw new ApiException(localVarStatusCode, "Error calling CustomersCustomerIdDelete: " + localVarResponse.ErrorMessage, localVarResponse.ErrorMessage);
 
-            return new ApiResponse<CustomerClient>(localVarStatusCode,
+            return new ApiResponse<Customer>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (CustomerClient)Configuration.ApiClient.Deserialize(localVarResponse, typeof(CustomerClient)));
+                (Customer)Configuration.ApiClient.Deserialize(localVarResponse, typeof(Customer)));
 
         }
 
@@ -2783,10 +2969,10 @@ namespace conekta.io.Api
         /// </summary>
         /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="customerId"></param>
-        /// <returns>Task of CustomerClient</returns>
-        public async System.Threading.Tasks.Task<CustomerClient> CustomersCustomerIdDeleteAsync(string customerId)
+        /// <returns>Task of Customer</returns>
+        public async System.Threading.Tasks.Task<Customer> CustomersCustomerIdDeleteAsync(string customerId)
         {
-            ApiResponse<CustomerClient> localVarResponse = await CustomersCustomerIdDeleteAsyncWithHttpInfo(customerId);
+            ApiResponse<Customer> localVarResponse = await CustomersCustomerIdDeleteAsyncWithHttpInfo(customerId);
             return localVarResponse.Data;
 
         }
@@ -2796,8 +2982,8 @@ namespace conekta.io.Api
         /// </summary>
         /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="customerId"></param>
-        /// <returns>Task of ApiResponse (CustomerClient)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<CustomerClient>> CustomersCustomerIdDeleteAsyncWithHttpInfo(string customerId)
+        /// <returns>Task of ApiResponse (Customer)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<Customer>> CustomersCustomerIdDeleteAsyncWithHttpInfo(string customerId)
         {
             // verify the required parameter 'customerId' is set
             if (customerId == null) throw new ApiException(400, "Missing required parameter 'customerId' when calling CustomersCustomerIdDelete");
@@ -2858,9 +3044,9 @@ namespace conekta.io.Api
             else if (localVarStatusCode == 0)
                 throw new ApiException(localVarStatusCode, "Error calling CustomersCustomerIdDelete: " + localVarResponse.ErrorMessage, localVarResponse.ErrorMessage);
 
-            return new ApiResponse<CustomerClient>(localVarStatusCode,
+            return new ApiResponse<Customer>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (CustomerClient)Configuration.ApiClient.Deserialize(localVarResponse, typeof(CustomerClient)));
+                (Customer)Configuration.ApiClient.Deserialize(localVarResponse, typeof(Customer)));
 
         }
 
@@ -3908,6 +4094,99 @@ namespace conekta.io.Api
             return new ApiResponse<Subscription>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
                 (Subscription)Configuration.ApiClient.Deserialize(localVarResponse, typeof(Subscription)));
+
+        }
+
+        /// <summary>
+        ///  captures an payment
+        /// </summary>
+        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="customerId"></param> 
+        /// <param name="cardId"></param> 
+        /// <returns>Card</returns>
+        public Card CustomersCustomerIdCardsCardIdDelete(string customerId, string cardId)
+        {
+            ApiResponse<Card> localVarResponse = CustomersCustomerIdCardsCardIdDeleteWithHttpInfo(customerId, cardId);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        ///  captures an payment
+        /// </summary>
+        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="customerId"></param> 
+        /// <param name="cardId"></param> 
+        /// <returns>ApiResponse of Card</returns>
+        public ApiResponse<Card> CustomersCustomerIdCardsCardIdDeleteWithHttpInfo(string customerId, string cardId)
+        {
+
+            // verify the required parameter 'customerId' is set
+            if (customerId == null)
+                throw new ApiException(400, "Missing required parameter 'customerId' when calling DefaultApi->CustomersCustomerIdCardsCardIdDelete");
+
+            // verify the required parameter 'cardId' is set
+            if (cardId == null)
+                throw new ApiException(400, "Missing required parameter 'cardId' when calling DefaultApi->CustomersCustomerIdCardsCardIdDelete");
+
+
+            var localVarPath = "/customers/{customer_id}/cards/{card_id}";
+
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new Dictionary<String, String>();
+            var localVarHeaderParams = new Dictionary<String, String>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+
+            };
+            String localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+
+            };
+            String localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null)
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+            // set "format" to json by default
+            // e.g. /pet/{petId}.{format} becomes /pet/{petId}.json
+            localVarPathParams.Add("format", "json");
+            if (customerId != null) localVarPathParams.Add("customer_id", Configuration.ApiClient.ParameterToString(customerId)); // path parameter
+            if (cardId != null) localVarPathParams.Add("card_id", Configuration.ApiClient.ParameterToString(cardId)); // path parameter
+
+
+
+
+
+
+            // authentication (conekta_api_key) required
+
+            // http basic authentication required
+            if (!String.IsNullOrEmpty(Configuration.Username) || !String.IsNullOrEmpty(Configuration.Password))
+            {
+                localVarHeaderParams["Authorization"] = "Basic " + Base64Encode(Configuration.Username + ":" + Configuration.Password);
+            }
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse)Configuration.ApiClient.CallApi(localVarPath,
+                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int)localVarResponse.StatusCode;
+
+            if (localVarStatusCode >= 400)
+                throw new ApiException(localVarStatusCode, "Error calling CustomersCustomerIdCardsCardIdDelete: " + localVarResponse.Content, localVarResponse.Content);
+            else if (localVarStatusCode == 0)
+                throw new ApiException(localVarStatusCode, "Error calling CustomersCustomerIdCardsCardIdDelete: " + localVarResponse.ErrorMessage, localVarResponse.ErrorMessage);
+
+            return new ApiResponse<Card>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (Card)Configuration.ApiClient.Deserialize(localVarResponse, typeof(Card)));
 
         }
 
