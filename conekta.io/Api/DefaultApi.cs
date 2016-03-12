@@ -1,10 +1,13 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using conekta.io.Resource;
 using conekta.io.Service;
+using Newtonsoft.Json.Linq;
 using RestSharp;
+using RestSharp.Authenticators;
 
 namespace conekta.io.Api
 {
@@ -15,7 +18,132 @@ namespace conekta.io.Api
     {
         #region Synchronous Operations
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        /// Gets all account events
+        /// </remarks>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <returns>List&lt;ModelEvent&gt;</returns>
+        List<ModelEvent> EventsGet(Dictionary<String, Object> localVarQueryParams = null);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        /// captures an payment
+        /// </remarks>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <param name="planId"></param>
+        /// <param name="plan"></param>
+        /// <returns>Plan</returns>
+        Plan PlansPlanIdPut(string planId, Plan plan);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <param name="planId"></param>
+        /// <returns>Plan</returns>
+        Plan PlansPlanIdDelete(string planId);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <param name="planId"></param>
+        /// <returns>ApiResponse of Plan</returns>
+        ApiResponse<Plan> PlansPlanIdDeleteWithHttpInfo(string planId);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        /// captures an payment
+        /// </remarks>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <param name="subscription"></param>
+        /// <returns>Plan</returns>
+        Plan PlansPost(Plan subscription);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        /// captures an payment
+        /// </remarks>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <param name="subscription"></param>
+        /// <returns>ApiResponse of Plan</returns>
+        ApiResponse<Plan> PlansPostWithHttpInfo(Plan subscription);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        /// captures an payment
+        /// </remarks>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <param name="subscription"></param>
+        /// <returns>Plan</returns>
+        Plan PlansPut(Plan subscription);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        /// captures an payment
+        /// </remarks>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <param name="subscription"></param>
+        /// <returns>ApiResponse of Plan</returns>
+        ApiResponse<Plan> PlansPutWithHttpInfo(Plan subscription);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        /// captures an payment
+        /// </remarks>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <param name="customerId"></param>
+        /// <param name="subscription"></param>
+        /// <returns>Subscription</returns>
+        Subscription CustomersCustomerIdSubscriptionPut(string customerId, SubscriptionReference subscription);
+
         Customer CustomersCustomerIdPut(string customerId, BaseClient client);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        /// captures an payment
+        /// </remarks>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <param name="customerId"></param>
+        /// <param name="cardId"></param>
+        /// <param name="client"></param>
+        /// <returns>Card</returns>
+        Card CustomersCustomerIdCardsCardIdPut(string customerId, string cardId, TokenObject client);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        /// captures an payment
+        /// </remarks>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <param name="customerId"></param>
+        /// <param name="cardId"></param>
+        /// <returns>Card</returns>
+        Card CustomersCustomerIdCardsCardIdPut(string customerId, string cardId);
 
         Card CustomersCustomerIdCardsCardIdDelete(string customerId, string cardId);
 
@@ -25,9 +153,9 @@ namespace conekta.io.Api
         /// <remarks>
         /// 
         /// </remarks>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <returns>List&lt;Charge&gt;</returns>
-        List<Charge> ChargesGet();
+        List<Charge> ChargesGet(Dictionary<string, string> query = null );
 
         /// <summary>
         /// 
@@ -35,9 +163,9 @@ namespace conekta.io.Api
         /// <remarks>
         /// 
         /// </remarks>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <returns>ApiResponse of List&lt;Charge&gt;</returns>
-        ApiResponse<List<Charge>> ChargesGetWithHttpInfo();
+        ApiResponse<List<Charge>> ChargesGetWithHttpInfo(Dictionary<string, string> query = null);
 
         /// <summary>
         /// Create a Charge
@@ -45,7 +173,7 @@ namespace conekta.io.Api
         /// <remarks>
         /// 
         /// </remarks>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="body">Charge object</param>
         /// <returns>Charge</returns>
         Charge ChargesPost(Charge body);
@@ -56,7 +184,7 @@ namespace conekta.io.Api
         /// <remarks>
         /// 
         /// </remarks>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="body">Charge object</param>
         /// <returns>ApiResponse of Charge</returns>
         ApiResponse<Charge> ChargesPostWithHttpInfo(Charge body);
@@ -67,7 +195,7 @@ namespace conekta.io.Api
         /// <remarks>
         /// 
         /// </remarks>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="chargeId"></param>
         /// <returns>Charge</returns>
         Charge ChargesChargeIdGet(string chargeId);
@@ -78,7 +206,7 @@ namespace conekta.io.Api
         /// <remarks>
         /// 
         /// </remarks>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="chargeId"></param>
         /// <returns>ApiResponse of Charge</returns>
         ApiResponse<Charge> ChargesChargeIdGetWithHttpInfo(string chargeId);
@@ -89,7 +217,7 @@ namespace conekta.io.Api
         /// <remarks>
         /// captures an payment
         /// </remarks>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="chargeId"></param>
         /// <returns>Charge</returns>
         Charge ChargesChargeIdCapturePost(string chargeId);
@@ -100,7 +228,7 @@ namespace conekta.io.Api
         /// <remarks>
         /// captures an payment
         /// </remarks>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="chargeId"></param>
         /// <returns>ApiResponse of Charge</returns>
         ApiResponse<Charge> ChargesChargeIdCapturePostWithHttpInfo(string chargeId);
@@ -111,7 +239,7 @@ namespace conekta.io.Api
         /// <remarks>
         /// 
         /// </remarks>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="chargeId"></param>
         /// <param name="amountQty"></param>
         /// <returns>Charge</returns>
@@ -123,7 +251,7 @@ namespace conekta.io.Api
         /// <remarks>
         /// 
         /// </remarks>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="chargeId"></param>
         /// <param name="amountQty"></param>
         /// <returns>ApiResponse of Charge</returns>
@@ -135,7 +263,7 @@ namespace conekta.io.Api
         /// <remarks>
         /// captures an payment
         /// </remarks>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="client"></param>
         /// <returns>Customer</returns>
         Customer CustomersPost(BaseClient client);
@@ -146,7 +274,7 @@ namespace conekta.io.Api
         /// <remarks>
         /// captures an payment
         /// </remarks>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="client"></param>
         /// <returns>ApiResponse of Customer</returns>
         ApiResponse<Customer> CustomersPostWithHttpInfo(BaseClient client);
@@ -157,7 +285,7 @@ namespace conekta.io.Api
         /// <remarks>
         /// captures an payment
         /// </remarks>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="subscription"></param>
         /// <returns>Plan</returns>
         Plan CustomersPlansPut(Plan subscription);
@@ -168,7 +296,7 @@ namespace conekta.io.Api
         /// <remarks>
         /// captures an payment
         /// </remarks>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="subscription"></param>
         /// <returns>ApiResponse of Plan</returns>
         ApiResponse<Plan> CustomersPlansPutWithHttpInfo(Plan subscription);
@@ -179,7 +307,7 @@ namespace conekta.io.Api
         /// <remarks>
         /// captures an payment
         /// </remarks>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="subscription"></param>
         /// <returns>Plan</returns>
         Plan CustomersPlansPost(Plan subscription);
@@ -190,7 +318,7 @@ namespace conekta.io.Api
         /// <remarks>
         /// captures an payment
         /// </remarks>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="subscription"></param>
         /// <returns>ApiResponse of Plan</returns>
         ApiResponse<Plan> CustomersPlansPostWithHttpInfo(Plan subscription);
@@ -201,7 +329,7 @@ namespace conekta.io.Api
         /// <remarks>
         /// 
         /// </remarks>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="planId"></param>
         /// <returns>Plan</returns>
         Plan CustomersPlansPlanIdDelete(string planId);
@@ -212,7 +340,7 @@ namespace conekta.io.Api
         /// <remarks>
         /// 
         /// </remarks>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="planId"></param>
         /// <returns>ApiResponse of Plan</returns>
         ApiResponse<Plan> CustomersPlansPlanIdDeleteWithHttpInfo(string planId);
@@ -223,7 +351,7 @@ namespace conekta.io.Api
         /// <remarks>
         /// captures an payment
         /// </remarks>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="customerId"></param>
         /// <returns>Customer</returns>
         Customer CustomersCustomerIdPut(string customerId);
@@ -234,7 +362,7 @@ namespace conekta.io.Api
         /// <remarks>
         /// captures an payment
         /// </remarks>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="customerId"></param>
         /// <returns>ApiResponse of Customer</returns>
         ApiResponse<Customer> CustomersCustomerIdPutWithHttpInfo(string customerId);
@@ -245,7 +373,7 @@ namespace conekta.io.Api
         /// <remarks>
         /// captures an payment
         /// </remarks>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="customerId"></param>
         /// <returns>Customer</returns>
         Customer CustomersCustomerIdDelete(string customerId);
@@ -256,7 +384,7 @@ namespace conekta.io.Api
         /// <remarks>
         /// captures an payment
         /// </remarks>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="customerId"></param>
         /// <returns>ApiResponse of Customer</returns>
         ApiResponse<Customer> CustomersCustomerIdDeleteWithHttpInfo(string customerId);
@@ -267,7 +395,7 @@ namespace conekta.io.Api
         /// <remarks>
         /// captures an payment
         /// </remarks>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="customerId"></param>
         /// <param name="client"></param>
         /// <returns>Card</returns>
@@ -279,7 +407,7 @@ namespace conekta.io.Api
         /// <remarks>
         /// captures an payment
         /// </remarks>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="customerId"></param>
         /// <param name="client"></param>
         /// <returns>ApiResponse of Card</returns>
@@ -291,7 +419,7 @@ namespace conekta.io.Api
         /// <remarks>
         /// captures an payment
         /// </remarks>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="customerId"></param>
         /// <param name="client"></param>
         /// <returns>Card</returns>
@@ -303,7 +431,7 @@ namespace conekta.io.Api
         /// <remarks>
         /// captures an payment
         /// </remarks>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="customerId"></param>
         /// <param name="client"></param>
         /// <returns>ApiResponse of Card</returns>
@@ -315,7 +443,7 @@ namespace conekta.io.Api
         /// <remarks>
         /// captures an payment
         /// </remarks>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="customerId"></param>
         /// <param name="client"></param>
         /// <returns>Card</returns>
@@ -327,7 +455,7 @@ namespace conekta.io.Api
         /// <remarks>
         /// captures an payment
         /// </remarks>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="customerId"></param>
         /// <param name="client"></param>
         /// <returns>ApiResponse of Card</returns>
@@ -339,7 +467,7 @@ namespace conekta.io.Api
         /// <remarks>
         /// captures an payment
         /// </remarks>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="customerId"></param>
         /// <param name="subscription"></param>
         /// <returns>Subscription</returns>
@@ -351,7 +479,7 @@ namespace conekta.io.Api
         /// <remarks>
         /// captures an payment
         /// </remarks>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="customerId"></param>
         /// <param name="subscription"></param>
         /// <returns>ApiResponse of Subscription</returns>
@@ -363,7 +491,7 @@ namespace conekta.io.Api
         /// <remarks>
         /// captures an payment
         /// </remarks>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="customerId"></param>
         /// <returns>Subscription</returns>
         Subscription CustomersCustomerIdSubscriptionCancelPost(string customerId);
@@ -374,7 +502,7 @@ namespace conekta.io.Api
         /// <remarks>
         /// captures an payment
         /// </remarks>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="customerId"></param>
         /// <returns>ApiResponse of Subscription</returns>
         ApiResponse<Subscription> CustomersCustomerIdSubscriptionCancelPostWithHttpInfo(string customerId);
@@ -385,7 +513,7 @@ namespace conekta.io.Api
         /// <remarks>
         /// captures an payment
         /// </remarks>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="customerId"></param>
         /// <returns>Subscription</returns>
         Subscription CustomersCustomerIdSubscriptionPausePost(string customerId);
@@ -396,7 +524,7 @@ namespace conekta.io.Api
         /// <remarks>
         /// captures an payment
         /// </remarks>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="customerId"></param>
         /// <returns>ApiResponse of Subscription</returns>
         ApiResponse<Subscription> CustomersCustomerIdSubscriptionPausePostWithHttpInfo(string customerId);
@@ -407,7 +535,7 @@ namespace conekta.io.Api
         /// <remarks>
         /// captures an payment
         /// </remarks>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="customerId"></param>
         /// <returns>Subscription</returns>
         Subscription CustomersCustomerIdSubscriptionResumePost(string customerId);
@@ -418,7 +546,7 @@ namespace conekta.io.Api
         /// <remarks>
         /// captures an payment
         /// </remarks>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="customerId"></param>
         /// <returns>ApiResponse of Subscription</returns>
         ApiResponse<Subscription> CustomersCustomerIdSubscriptionResumePostWithHttpInfo(string customerId);
@@ -433,7 +561,7 @@ namespace conekta.io.Api
         /// <remarks>
         /// 
         /// </remarks>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <returns>Task of List&lt;Charge&gt;</returns>
         System.Threading.Tasks.Task<List<Charge>> ChargesGetAsync();
 
@@ -443,7 +571,7 @@ namespace conekta.io.Api
         /// <remarks>
         /// 
         /// </remarks>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <returns>Task of ApiResponse (List&lt;Charge&gt;)</returns>
         System.Threading.Tasks.Task<ApiResponse<List<Charge>>> ChargesGetAsyncWithHttpInfo();
 
@@ -453,7 +581,7 @@ namespace conekta.io.Api
         /// <remarks>
         /// 
         /// </remarks>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="body">Charge object</param>
         /// <returns>Task of Charge</returns>
         System.Threading.Tasks.Task<Charge> ChargesPostAsync(Charge body);
@@ -464,7 +592,7 @@ namespace conekta.io.Api
         /// <remarks>
         /// 
         /// </remarks>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="body">Charge object</param>
         /// <returns>Task of ApiResponse (Charge)</returns>
         System.Threading.Tasks.Task<ApiResponse<Charge>> ChargesPostAsyncWithHttpInfo(Charge body);
@@ -475,7 +603,7 @@ namespace conekta.io.Api
         /// <remarks>
         /// 
         /// </remarks>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="chargeId"></param>
         /// <returns>Task of Charge</returns>
         System.Threading.Tasks.Task<Charge> ChargesChargeIdGetAsync(string chargeId);
@@ -486,7 +614,7 @@ namespace conekta.io.Api
         /// <remarks>
         /// 
         /// </remarks>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="chargeId"></param>
         /// <returns>Task of ApiResponse (Charge)</returns>
         System.Threading.Tasks.Task<ApiResponse<Charge>> ChargesChargeIdGetAsyncWithHttpInfo(string chargeId);
@@ -497,7 +625,7 @@ namespace conekta.io.Api
         /// <remarks>
         /// captures an payment
         /// </remarks>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="chargeId"></param>
         /// <returns>Task of Charge</returns>
         System.Threading.Tasks.Task<Charge> ChargesChargeIdCapturePostAsync(string chargeId);
@@ -508,7 +636,7 @@ namespace conekta.io.Api
         /// <remarks>
         /// captures an payment
         /// </remarks>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="chargeId"></param>
         /// <returns>Task of ApiResponse (Charge)</returns>
         System.Threading.Tasks.Task<ApiResponse<Charge>> ChargesChargeIdCapturePostAsyncWithHttpInfo(string chargeId);
@@ -519,7 +647,7 @@ namespace conekta.io.Api
         /// <remarks>
         /// 
         /// </remarks>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="chargeId"></param>
         /// <param name="amountQty"></param>
         /// <returns>Task of Charge</returns>
@@ -531,7 +659,7 @@ namespace conekta.io.Api
         /// <remarks>
         /// 
         /// </remarks>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="chargeId"></param>
         /// <param name="amountQty"></param>
         /// <returns>Task of ApiResponse (Charge)</returns>
@@ -543,7 +671,7 @@ namespace conekta.io.Api
         /// <remarks>
         /// captures an payment
         /// </remarks>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="client"></param>
         /// <returns>Task of Customer</returns>
         System.Threading.Tasks.Task<Customer> CustomersPostAsync(BaseClient client);
@@ -554,7 +682,7 @@ namespace conekta.io.Api
         /// <remarks>
         /// captures an payment
         /// </remarks>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="client"></param>
         /// <returns>Task of ApiResponse (Customer)</returns>
         System.Threading.Tasks.Task<ApiResponse<Customer>> CustomersPostAsyncWithHttpInfo(BaseClient client);
@@ -565,7 +693,7 @@ namespace conekta.io.Api
         /// <remarks>
         /// captures an payment
         /// </remarks>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="subscription"></param>
         /// <returns>Task of Plan</returns>
         System.Threading.Tasks.Task<Plan> CustomersPlansPutAsync(Plan subscription);
@@ -576,7 +704,7 @@ namespace conekta.io.Api
         /// <remarks>
         /// captures an payment
         /// </remarks>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="subscription"></param>
         /// <returns>Task of ApiResponse (Plan)</returns>
         System.Threading.Tasks.Task<ApiResponse<Plan>> CustomersPlansPutAsyncWithHttpInfo(Plan subscription);
@@ -587,7 +715,7 @@ namespace conekta.io.Api
         /// <remarks>
         /// captures an payment
         /// </remarks>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="subscription"></param>
         /// <returns>Task of Plan</returns>
         System.Threading.Tasks.Task<Plan> CustomersPlansPostAsync(Plan subscription);
@@ -598,7 +726,7 @@ namespace conekta.io.Api
         /// <remarks>
         /// captures an payment
         /// </remarks>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="subscription"></param>
         /// <returns>Task of ApiResponse (Plan)</returns>
         System.Threading.Tasks.Task<ApiResponse<Plan>> CustomersPlansPostAsyncWithHttpInfo(Plan subscription);
@@ -609,7 +737,7 @@ namespace conekta.io.Api
         /// <remarks>
         /// 
         /// </remarks>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="planId"></param>
         /// <returns>Task of Plan</returns>
         System.Threading.Tasks.Task<Plan> CustomersPlansPlanIdDeleteAsync(string planId);
@@ -620,7 +748,7 @@ namespace conekta.io.Api
         /// <remarks>
         /// 
         /// </remarks>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="planId"></param>
         /// <returns>Task of ApiResponse (Plan)</returns>
         System.Threading.Tasks.Task<ApiResponse<Plan>> CustomersPlansPlanIdDeleteAsyncWithHttpInfo(string planId);
@@ -631,7 +759,7 @@ namespace conekta.io.Api
         /// <remarks>
         /// captures an payment
         /// </remarks>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="customerId"></param>
         /// <returns>Task of Customer</returns>
         System.Threading.Tasks.Task<Customer> CustomersCustomerIdPutAsync(string customerId);
@@ -642,7 +770,7 @@ namespace conekta.io.Api
         /// <remarks>
         /// captures an payment
         /// </remarks>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="customerId"></param>
         /// <returns>Task of ApiResponse (Customer)</returns>
         System.Threading.Tasks.Task<ApiResponse<Customer>> CustomersCustomerIdPutAsyncWithHttpInfo(string customerId);
@@ -653,7 +781,7 @@ namespace conekta.io.Api
         /// <remarks>
         /// captures an payment
         /// </remarks>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="customerId"></param>
         /// <returns>Task of Customer</returns>
         System.Threading.Tasks.Task<Customer> CustomersCustomerIdDeleteAsync(string customerId);
@@ -664,7 +792,7 @@ namespace conekta.io.Api
         /// <remarks>
         /// captures an payment
         /// </remarks>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="customerId"></param>
         /// <returns>Task of ApiResponse (Customer)</returns>
         System.Threading.Tasks.Task<ApiResponse<Customer>> CustomersCustomerIdDeleteAsyncWithHttpInfo(string customerId);
@@ -675,7 +803,7 @@ namespace conekta.io.Api
         /// <remarks>
         /// captures an payment
         /// </remarks>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="customerId"></param>
         /// <param name="client"></param>
         /// <returns>Task of Card</returns>
@@ -687,7 +815,7 @@ namespace conekta.io.Api
         /// <remarks>
         /// captures an payment
         /// </remarks>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="customerId"></param>
         /// <param name="client"></param>
         /// <returns>Task of ApiResponse (Card)</returns>
@@ -699,7 +827,7 @@ namespace conekta.io.Api
         /// <remarks>
         /// captures an payment
         /// </remarks>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="customerId"></param>
         /// <param name="client"></param>
         /// <returns>Task of Card</returns>
@@ -711,7 +839,7 @@ namespace conekta.io.Api
         /// <remarks>
         /// captures an payment
         /// </remarks>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="customerId"></param>
         /// <param name="client"></param>
         /// <returns>Task of ApiResponse (Card)</returns>
@@ -723,7 +851,7 @@ namespace conekta.io.Api
         /// <remarks>
         /// captures an payment
         /// </remarks>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="customerId"></param>
         /// <param name="client"></param>
         /// <returns>Task of Card</returns>
@@ -735,7 +863,7 @@ namespace conekta.io.Api
         /// <remarks>
         /// captures an payment
         /// </remarks>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="customerId"></param>
         /// <param name="client"></param>
         /// <returns>Task of ApiResponse (Card)</returns>
@@ -747,7 +875,7 @@ namespace conekta.io.Api
         /// <remarks>
         /// captures an payment
         /// </remarks>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="customerId"></param>
         /// <param name="subscription"></param>
         /// <returns>Task of Subscription</returns>
@@ -759,7 +887,7 @@ namespace conekta.io.Api
         /// <remarks>
         /// captures an payment
         /// </remarks>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="customerId"></param>
         /// <param name="subscription"></param>
         /// <returns>Task of ApiResponse (Subscription)</returns>
@@ -771,7 +899,7 @@ namespace conekta.io.Api
         /// <remarks>
         /// captures an payment
         /// </remarks>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="customerId"></param>
         /// <returns>Task of Subscription</returns>
         System.Threading.Tasks.Task<Subscription> CustomersCustomerIdSubscriptionCancelPostAsync(string customerId);
@@ -782,7 +910,7 @@ namespace conekta.io.Api
         /// <remarks>
         /// captures an payment
         /// </remarks>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="customerId"></param>
         /// <returns>Task of ApiResponse (Subscription)</returns>
         System.Threading.Tasks.Task<ApiResponse<Subscription>> CustomersCustomerIdSubscriptionCancelPostAsyncWithHttpInfo(string customerId);
@@ -793,7 +921,7 @@ namespace conekta.io.Api
         /// <remarks>
         /// captures an payment
         /// </remarks>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="customerId"></param>
         /// <returns>Task of Subscription</returns>
         System.Threading.Tasks.Task<Subscription> CustomersCustomerIdSubscriptionPausePostAsync(string customerId);
@@ -804,7 +932,7 @@ namespace conekta.io.Api
         /// <remarks>
         /// captures an payment
         /// </remarks>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="customerId"></param>
         /// <returns>Task of ApiResponse (Subscription)</returns>
         System.Threading.Tasks.Task<ApiResponse<Subscription>> CustomersCustomerIdSubscriptionPausePostAsyncWithHttpInfo(string customerId);
@@ -815,7 +943,7 @@ namespace conekta.io.Api
         /// <remarks>
         /// captures an payment
         /// </remarks>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="customerId"></param>
         /// <returns>Task of Subscription</returns>
         System.Threading.Tasks.Task<Subscription> CustomersCustomerIdSubscriptionResumePostAsync(string customerId);
@@ -826,7 +954,7 @@ namespace conekta.io.Api
         /// <remarks>
         /// captures an payment
         /// </remarks>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="customerId"></param>
         /// <returns>Task of ApiResponse (Subscription)</returns>
         System.Threading.Tasks.Task<ApiResponse<Subscription>> CustomersCustomerIdSubscriptionResumePostAsyncWithHttpInfo(string customerId);
@@ -840,6 +968,685 @@ namespace conekta.io.Api
     /// </summary>
     public class DefaultApi : IDefaultApi
     {
+
+        /// <summary>
+        ///  Gets all account events
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <returns>List&lt;ModelEvent&gt;</returns>
+        public List<ModelEvent> EventsGet(Dictionary<String, Object> localVarQueryParams = null)
+        {
+            ApiResponse<List<ModelEvent>> localVarResponse = EventsGetWithHttpInfo(localVarQueryParams);
+            return localVarResponse.Data;
+        }
+
+
+        /// <summary>
+        ///  Gets all account events
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <returns>ApiResponse of List&lt;ModelEvent&gt;</returns>
+        public ApiResponse<List<ModelEvent>> EventsGetWithHttpInfo(Dictionary<String, Object> localVarQueryParams = null)
+        {
+
+            localVarQueryParams = localVarQueryParams ?? new Dictionary<String, Object>();
+
+            var sanitizedLocalQueryParams = new Dictionary<String, List<String>>();
+
+        
+            foreach (var keyValuePair in localVarQueryParams)
+            {
+
+                sanitizedLocalQueryParams.Add(keyValuePair.Key, new List<string>());
+                try
+                {
+                    var arrayParams = JArray.Parse(keyValuePair.Value.ToString());
+                    foreach (var arrayParam in arrayParams)
+                    {
+                        sanitizedLocalQueryParams[keyValuePair.Key].Add(arrayParam.ToString());
+                    }
+                }
+                catch (Exception)
+                {
+                    sanitizedLocalQueryParams[keyValuePair.Key].Add(keyValuePair.Value.ToString());
+                }
+            }
+
+            var localVarPath = "/events";
+
+            var localVarPathParams = new Dictionary<String, String>();
+            
+            var localVarHeaderParams = new Dictionary<String, String>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+
+            };
+            String localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+
+            };
+            String localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null)
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+            // set "format" to json by default
+            // e.g. /pet/{petId}.{format} becomes /pet/{petId}.json
+            localVarPathParams.Add("format", "json");
+
+
+
+
+
+
+            // authentication (conekta_api_key) required
+
+            // http basic authentication required
+            if (!String.IsNullOrEmpty(Configuration.Username) || !String.IsNullOrEmpty(Configuration.Password))
+            {
+                localVarHeaderParams["Authorization"] = "Basic " + Base64Encode(Configuration.Username + ":" + Configuration.Password);
+            }
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse)Configuration.ApiClient.CallApi(localVarPath,
+                Method.GET, sanitizedLocalQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int)localVarResponse.StatusCode;
+
+            if (localVarStatusCode >= 400)
+                throw new ApiException(localVarStatusCode, "Error calling EventsGet: " + localVarResponse.Content, localVarResponse.Content);
+            else if (localVarStatusCode == 0)
+                throw new ApiException(localVarStatusCode, "Error calling EventsGet: " + localVarResponse.ErrorMessage, localVarResponse.ErrorMessage);
+
+            return new ApiResponse<List<ModelEvent>>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (List<ModelEvent>)Configuration.ApiClient.Deserialize(localVarResponse, typeof(List<ModelEvent>)));
+
+        }
+
+        /// <summary>
+        ///  captures an payment
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <param name="planId"></param> 
+        /// <param name="plan"></param> 
+        /// <returns>Plan</returns>
+        public Plan PlansPlanIdPut(string planId, Plan plan)
+        {
+            ApiResponse<Plan> localVarResponse = PlansPlanIdPutWithHttpInfo(planId, plan);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        ///  captures an payment
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <param name="planId"></param> 
+        /// <param name="plan"></param> 
+        /// <returns>ApiResponse of Plan</returns>
+        public ApiResponse<Plan> PlansPlanIdPutWithHttpInfo(string planId, Plan plan)
+        {
+
+            // verify the required parameter 'planId' is set
+            if (planId == null)
+                throw new ApiException(400, "Missing required parameter 'planId' when calling DefaultApi->PlansPlanIdPut");
+
+            // verify the required parameter 'plan' is set
+            if (plan == null)
+                throw new ApiException(400, "Missing required parameter 'plan' when calling DefaultApi->PlansPlanIdPut");
+
+
+            var localVarPath = "/plans/{plan_id}";
+
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new Dictionary<String, String>();
+            var localVarHeaderParams = new Dictionary<String, String>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+
+            };
+            String localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+
+            };
+            String localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null)
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+            // set "format" to json by default
+            // e.g. /pet/{petId}.{format} becomes /pet/{petId}.json
+            localVarPathParams.Add("format", "json");
+            if (planId != null) localVarPathParams.Add("plan_id", Configuration.ApiClient.ParameterToString(planId)); // path parameter
+
+
+
+
+            if (plan.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = Configuration.ApiClient.Serialize(plan); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = plan; // byte array
+            }
+
+            // authentication (conekta_api_key) required
+
+            // http basic authentication required
+            if (!String.IsNullOrEmpty(Configuration.Username) || !String.IsNullOrEmpty(Configuration.Password))
+            {
+                localVarHeaderParams["Authorization"] = "Basic " + Base64Encode(Configuration.Username + ":" + Configuration.Password);
+            }
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse)Configuration.ApiClient.CallApi(localVarPath,
+                Method.PUT, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int)localVarResponse.StatusCode;
+
+            if (localVarStatusCode >= 400)
+                throw new ApiException(localVarStatusCode, "Error calling PlansPlanIdPut: " + localVarResponse.Content, localVarResponse.Content);
+            else if (localVarStatusCode == 0)
+                throw new ApiException(localVarStatusCode, "Error calling PlansPlanIdPut: " + localVarResponse.ErrorMessage, localVarResponse.ErrorMessage);
+
+            return new ApiResponse<Plan>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (Plan)Configuration.ApiClient.Deserialize(localVarResponse, typeof(Plan)));
+
+        }
+        /// <summary>
+        ///  
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <param name="planId"></param> 
+        /// <returns>Plan</returns>
+        public Plan PlansPlanIdDelete(string planId)
+        {
+            ApiResponse<Plan> localVarResponse = PlansPlanIdDeleteWithHttpInfo(planId);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        ///  
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <param name="planId"></param> 
+        /// <returns>ApiResponse of Plan</returns>
+        public ApiResponse<Plan> PlansPlanIdDeleteWithHttpInfo(string planId)
+        {
+
+            // verify the required parameter 'planId' is set
+            if (planId == null)
+                throw new ApiException(400, "Missing required parameter 'planId' when calling DefaultApi->PlansPlanIdDelete");
+
+
+            var localVarPath = "/plans/{plan_id}";
+
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new Dictionary<String, String>();
+            var localVarHeaderParams = new Dictionary<String, String>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+
+            };
+            String localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+
+            };
+            String localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null)
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+            // set "format" to json by default
+            // e.g. /pet/{petId}.{format} becomes /pet/{petId}.json
+            localVarPathParams.Add("format", "json");
+            if (planId != null) localVarPathParams.Add("plan_id", Configuration.ApiClient.ParameterToString(planId)); // path parameter
+
+
+
+
+
+
+            // authentication (conekta_api_key) required
+
+            // http basic authentication required
+            if (!String.IsNullOrEmpty(Configuration.Username) || !String.IsNullOrEmpty(Configuration.Password))
+            {
+                localVarHeaderParams["Authorization"] = "Basic " + Base64Encode(Configuration.Username + ":" + Configuration.Password);
+            }
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse)Configuration.ApiClient.CallApi(localVarPath,
+                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int)localVarResponse.StatusCode;
+
+            if (localVarStatusCode >= 400)
+                throw new ApiException(localVarStatusCode, "Error calling PlansPlanIdDelete: " + localVarResponse.Content, localVarResponse.Content);
+            else if (localVarStatusCode == 0)
+                throw new ApiException(localVarStatusCode, "Error calling PlansPlanIdDelete: " + localVarResponse.ErrorMessage, localVarResponse.ErrorMessage);
+
+            return new ApiResponse<Plan>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (Plan)Configuration.ApiClient.Deserialize(localVarResponse, typeof(Plan)));
+
+        }
+
+
+        /// <summary>
+        ///  captures an payment
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <param name="subscription"></param> 
+        /// <returns>Plan</returns>
+        public Plan PlansPost(Plan subscription)
+        {
+            ApiResponse<Plan> localVarResponse = PlansPostWithHttpInfo(subscription);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        ///  captures an payment
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <param name="subscription"></param> 
+        /// <returns>ApiResponse of Plan</returns>
+        public ApiResponse<Plan> PlansPostWithHttpInfo(Plan subscription)
+        {
+
+            // verify the required parameter 'subscription' is set
+            if (subscription == null)
+                throw new ApiException(400, "Missing required parameter 'subscription' when calling DefaultApi->PlansPost");
+
+
+            var localVarPath = "/plans";
+
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new Dictionary<String, String>();
+            var localVarHeaderParams = new Dictionary<String, String>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+
+            };
+            String localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+
+            };
+            String localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null)
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+            // set "format" to json by default
+            // e.g. /pet/{petId}.{format} becomes /pet/{petId}.json
+            localVarPathParams.Add("format", "json");
+
+
+
+
+            if (subscription.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = Configuration.ApiClient.Serialize(subscription); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = subscription; // byte array
+            }
+
+            // authentication (conekta_api_key) required
+
+            // http basic authentication required
+            if (!String.IsNullOrEmpty(Configuration.Username) || !String.IsNullOrEmpty(Configuration.Password))
+            {
+                localVarHeaderParams["Authorization"] = "Basic " + Base64Encode(Configuration.Username + ":" + Configuration.Password);
+            }
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse)Configuration.ApiClient.CallApi(localVarPath,
+                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int)localVarResponse.StatusCode;
+
+            if (localVarStatusCode >= 400)
+                throw new ApiException(localVarStatusCode, "Error calling PlansPost: " + localVarResponse.Content, localVarResponse.Content);
+            else if (localVarStatusCode == 0)
+                throw new ApiException(localVarStatusCode, "Error calling PlansPost: " + localVarResponse.ErrorMessage, localVarResponse.ErrorMessage);
+
+            return new ApiResponse<Plan>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (Plan)Configuration.ApiClient.Deserialize(localVarResponse, typeof(Plan)));
+
+        }
+
+
+        /// <summary>
+        ///  captures an payment
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <param name="subscription"></param> 
+        /// <returns>Plan</returns>
+        public Plan PlansPut(Plan subscription)
+        {
+            ApiResponse<Plan> localVarResponse = PlansPutWithHttpInfo(subscription);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        ///  captures an payment
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <param name="subscription"></param> 
+        /// <returns>ApiResponse of Plan</returns>
+        public ApiResponse<Plan> PlansPutWithHttpInfo(Plan subscription)
+        {
+
+            // verify the required parameter 'subscription' is set
+            if (subscription == null)
+                throw new ApiException(400, "Missing required parameter 'subscription' when calling DefaultApi->PlansPut");
+
+
+            var localVarPath = "/plans";
+
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new Dictionary<String, String>();
+            var localVarHeaderParams = new Dictionary<String, String>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+
+            };
+            String localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+
+            };
+            String localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null)
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+            // set "format" to json by default
+            // e.g. /pet/{petId}.{format} becomes /pet/{petId}.json
+            localVarPathParams.Add("format", "json");
+
+
+
+
+            if (subscription.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = Configuration.ApiClient.Serialize(subscription); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = subscription; // byte array
+            }
+
+            // authentication (conekta_api_key) required
+
+            // http basic authentication required
+            if (!String.IsNullOrEmpty(Configuration.Username) || !String.IsNullOrEmpty(Configuration.Password))
+            {
+                localVarHeaderParams["Authorization"] = "Basic " + Base64Encode(Configuration.Username + ":" + Configuration.Password);
+            }
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse)Configuration.ApiClient.CallApi(localVarPath,
+                Method.PUT, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int)localVarResponse.StatusCode;
+
+            if (localVarStatusCode >= 400)
+                throw new ApiException(localVarStatusCode, "Error calling PlansPut: " + localVarResponse.Content, localVarResponse.Content);
+            else if (localVarStatusCode == 0)
+                throw new ApiException(localVarStatusCode, "Error calling PlansPut: " + localVarResponse.ErrorMessage, localVarResponse.ErrorMessage);
+
+            return new ApiResponse<Plan>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (Plan)Configuration.ApiClient.Deserialize(localVarResponse, typeof(Plan)));
+
+        }
+
+
+
+
+        /// <summary>
+        ///  captures an payment
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <param name="customerId"></param> 
+        /// <param name="subscription"></param> 
+        /// <returns>Subscription</returns>
+        public Subscription CustomersCustomerIdSubscriptionPut(string customerId, SubscriptionReference subscription)
+        {
+            ApiResponse<Subscription> localVarResponse = CustomersCustomerIdSubscriptionPutWithHttpInfo(customerId, subscription);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        ///  captures an payment
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <param name="customerId"></param> 
+        /// <param name="subscription"></param> 
+        /// <returns>ApiResponse of Subscription</returns>
+        public ApiResponse<Subscription> CustomersCustomerIdSubscriptionPutWithHttpInfo(string customerId, SubscriptionReference subscription)
+        {
+
+            // verify the required parameter 'customerId' is set
+            if (customerId == null)
+                throw new ApiException(400, "Missing required parameter 'customerId' when calling DefaultApi->CustomersCustomerIdSubscriptionPut");
+
+            // verify the required parameter 'subscription' is set
+            if (subscription == null)
+                throw new ApiException(400, "Missing required parameter 'subscription' when calling DefaultApi->CustomersCustomerIdSubscriptionPut");
+
+
+            var localVarPath = "/customers/{customer_id}/subscription";
+
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new Dictionary<String, String>();
+            var localVarHeaderParams = new Dictionary<String, String>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+
+            };
+            String localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+
+            };
+            String localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null)
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+            // set "format" to json by default
+            // e.g. /pet/{petId}.{format} becomes /pet/{petId}.json
+            localVarPathParams.Add("format", "json");
+            if (customerId != null) localVarPathParams.Add("customer_id", Configuration.ApiClient.ParameterToString(customerId)); // path parameter
+
+
+
+
+            if (subscription.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = Configuration.ApiClient.Serialize(subscription); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = subscription; // byte array
+            }
+
+            // authentication (conekta_api_key) required
+
+            // http basic authentication required
+            if (!String.IsNullOrEmpty(Configuration.Username) || !String.IsNullOrEmpty(Configuration.Password))
+            {
+                localVarHeaderParams["Authorization"] = "Basic " + Base64Encode(Configuration.Username + ":" + Configuration.Password);
+            }
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse)Configuration.ApiClient.CallApi(localVarPath,
+                Method.PUT, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int)localVarResponse.StatusCode;
+
+            if (localVarStatusCode >= 400)
+                throw new ApiException(localVarStatusCode, "Error calling CustomersCustomerIdSubscriptionPut: " + localVarResponse.Content, localVarResponse.Content);
+            else if (localVarStatusCode == 0)
+                throw new ApiException(localVarStatusCode, "Error calling CustomersCustomerIdSubscriptionPut: " + localVarResponse.ErrorMessage, localVarResponse.ErrorMessage);
+
+            return new ApiResponse<Subscription>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (Subscription)Configuration.ApiClient.Deserialize(localVarResponse, typeof(Subscription)));
+
+        }
+        /// <summary>
+        ///  captures an payment
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <param name="customerId"></param> 
+        /// <param name="cardId"></param> 
+        /// <param name="client"></param> 
+        /// <returns>Card</returns>
+        public Card CustomersCustomerIdCardsCardIdPut(string customerId, string cardId, TokenObject client)
+        {
+            ApiResponse<Card> localVarResponse = CustomersCustomerIdCardsCardIdPutWithHttpInfo(customerId, cardId, client);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        ///  captures an payment
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <param name="customerId"></param> 
+        /// <param name="cardId"></param> 
+        /// <param name="client"></param> 
+        /// <returns>ApiResponse of Card</returns>
+        public ApiResponse<Card> CustomersCustomerIdCardsCardIdPutWithHttpInfo(string customerId, string cardId, TokenObject client)
+        {
+
+            // verify the required parameter 'customerId' is set
+            if (customerId == null)
+                throw new ApiException(400, "Missing required parameter 'customerId' when calling DefaultApi->CustomersCustomerIdCardsCardIdPut");
+
+            // verify the required parameter 'cardId' is set
+            if (cardId == null)
+                throw new ApiException(400, "Missing required parameter 'cardId' when calling DefaultApi->CustomersCustomerIdCardsCardIdPut");
+
+            // verify the required parameter 'client' is set
+            if (client == null)
+                throw new ApiException(400, "Missing required parameter 'client' when calling DefaultApi->CustomersCustomerIdCardsCardIdPut");
+
+
+            var localVarPath = "/customers/{customer_id}/cards/{card_id}";
+
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new Dictionary<String, String>();
+            var localVarHeaderParams = new Dictionary<String, String>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+
+            };
+            String localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+
+            };
+            String localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null)
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+            // set "format" to json by default
+            // e.g. /pet/{petId}.{format} becomes /pet/{petId}.json
+            localVarPathParams.Add("format", "json");
+            if (customerId != null) localVarPathParams.Add("customer_id", Configuration.ApiClient.ParameterToString(customerId)); // path parameter
+            if (cardId != null) localVarPathParams.Add("card_id", Configuration.ApiClient.ParameterToString(cardId)); // path parameter
+
+
+
+
+            if (client.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = Configuration.ApiClient.Serialize(client); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = client; // byte array
+            }
+
+            // authentication (conekta_api_key) required
+
+            // http basic authentication required
+            if (!String.IsNullOrEmpty(Configuration.Username) || !String.IsNullOrEmpty(Configuration.Password))
+            {
+                localVarHeaderParams["Authorization"] = "Basic " + Base64Encode(Configuration.Username + ":" + Configuration.Password);
+            }
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse)Configuration.ApiClient.CallApi(localVarPath,
+                Method.PUT, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int)localVarResponse.StatusCode;
+
+            if (localVarStatusCode >= 400)
+                throw new ApiException(localVarStatusCode, "Error calling CustomersCustomerIdCardsCardIdPut: " + localVarResponse.Content, localVarResponse.Content);
+            else if (localVarStatusCode == 0)
+                throw new ApiException(localVarStatusCode, "Error calling CustomersCustomerIdCardsCardIdPut: " + localVarResponse.ErrorMessage, localVarResponse.ErrorMessage);
+
+            return new ApiResponse<Card>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (Card)Configuration.ApiClient.Deserialize(localVarResponse, typeof(Card)));
+
+        }
         /// <summary>
         /// Initializes a new instance of the <see cref="DefaultApi"/> class.
         /// </summary>
@@ -914,7 +1721,7 @@ namespace conekta.io.Api
         /// <summary>
         ///  captures an payment
         /// </summary>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="customerId"></param> 
         /// <param name="client"></param> 
         /// <returns>Customer</returns>
@@ -927,7 +1734,7 @@ namespace conekta.io.Api
         /// <summary>
         ///  captures an payment
         /// </summary>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="customerId"></param> 
         /// <param name="client"></param> 
         /// <returns>ApiResponse of Customer</returns>
@@ -1013,22 +1820,46 @@ namespace conekta.io.Api
         /// <summary>
         ///  
         /// </summary>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <returns>List&lt;Charge&gt;</returns>
-        public List<Charge> ChargesGet()
+        public List<Charge> ChargesGet(Dictionary<string, string> query = null)
         {
-            ApiResponse<List<Charge>> localVarResponse = ChargesGetWithHttpInfo();
+            ApiResponse<List<Charge>> localVarResponse = ChargesGetWithHttpInfo(query);
             return localVarResponse.Data;
         }
 
         /// <summary>
         ///  
         /// </summary>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <returns>ApiResponse of List&lt;Charge&gt;</returns>
-        public ApiResponse<List<Charge>> ChargesGetWithHttpInfo()
+        public ApiResponse<List<Charge>> ChargesGetWithHttpInfo(Dictionary<string, string> query = null )
         {
 
+
+            var sanitizedLocalQueryParams = new Dictionary<String, List<String>>();
+
+
+            if (query != null)
+            {
+                foreach (var keyValuePair in query)
+                {
+
+                    sanitizedLocalQueryParams.Add(keyValuePair.Key, new List<string>());
+                    try
+                    {
+                        var arrayParams = JArray.Parse(keyValuePair.Value.ToString());
+                        foreach (var arrayParam in arrayParams)
+                        {
+                            sanitizedLocalQueryParams[keyValuePair.Key].Add(arrayParam.ToString());
+                        }
+                    }
+                    catch (Exception)
+                    {
+                        sanitizedLocalQueryParams[keyValuePair.Key].Add(keyValuePair.Value.ToString());
+                    }
+                }
+            }
 
             var localVarPath = "/charges";
 
@@ -1073,7 +1904,7 @@ namespace conekta.io.Api
 
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse)Configuration.ApiClient.CallApi(localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                Method.GET, localVarQueryParams, sanitizedLocalQueryParams, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
             int localVarStatusCode = (int)localVarResponse.StatusCode;
@@ -1089,11 +1920,104 @@ namespace conekta.io.Api
 
         }
 
+        /// <summary>
+        ///  captures an payment
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <param name="customerId"></param> 
+        /// <param name="cardId"></param> 
+        /// <returns>Card</returns>
+        public Card CustomersCustomerIdCardsCardIdPut(string customerId, string cardId)
+        {
+            ApiResponse<Card> localVarResponse = CustomersCustomerIdCardsCardIdPutWithHttpInfo(customerId, cardId);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        ///  captures an payment
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <param name="customerId"></param> 
+        /// <param name="cardId"></param> 
+        /// <returns>ApiResponse of Card</returns>
+        public ApiResponse<Card> CustomersCustomerIdCardsCardIdPutWithHttpInfo(string customerId, string cardId)
+        {
+
+            // verify the required parameter 'customerId' is set
+            if (customerId == null)
+                throw new ApiException(400, "Missing required parameter 'customerId' when calling DefaultApi->CustomersCustomerIdCardsCardIdPut");
+
+            // verify the required parameter 'cardId' is set
+            if (cardId == null)
+                throw new ApiException(400, "Missing required parameter 'cardId' when calling DefaultApi->CustomersCustomerIdCardsCardIdPut");
+
+
+            var localVarPath = "/customers/{customer_id}/cards/{card_id}";
+
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new Dictionary<String, String>();
+            var localVarHeaderParams = new Dictionary<String, String>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+
+            };
+            String localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+
+            };
+            String localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null)
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+            // set "format" to json by default
+            // e.g. /pet/{petId}.{format} becomes /pet/{petId}.json
+            localVarPathParams.Add("format", "json");
+            if (customerId != null) localVarPathParams.Add("customer_id", Configuration.ApiClient.ParameterToString(customerId)); // path parameter
+            if (cardId != null) localVarPathParams.Add("card_id", Configuration.ApiClient.ParameterToString(cardId)); // path parameter
+
+
+
+
+
+
+            // authentication (conekta_api_key) required
+
+            // http basic authentication required
+            if (!String.IsNullOrEmpty(Configuration.Username) || !String.IsNullOrEmpty(Configuration.Password))
+            {
+                localVarHeaderParams["Authorization"] = "Basic " + Base64Encode(Configuration.Username + ":" + Configuration.Password);
+            }
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse)Configuration.ApiClient.CallApi(localVarPath,
+                Method.PUT, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int)localVarResponse.StatusCode;
+
+            if (localVarStatusCode >= 400)
+                throw new ApiException(localVarStatusCode, "Error calling CustomersCustomerIdCardsCardIdPut: " + localVarResponse.Content, localVarResponse.Content);
+            else if (localVarStatusCode == 0)
+                throw new ApiException(localVarStatusCode, "Error calling CustomersCustomerIdCardsCardIdPut: " + localVarResponse.ErrorMessage, localVarResponse.ErrorMessage);
+
+            return new ApiResponse<Card>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (Card)Configuration.ApiClient.Deserialize(localVarResponse, typeof(Card)));
+
+        }
+
 
         /// <summary>
         ///  
         /// </summary>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <returns>Task of List&lt;Charge&gt;</returns>
         public async System.Threading.Tasks.Task<List<Charge>> ChargesGetAsync()
         {
@@ -1105,7 +2029,7 @@ namespace conekta.io.Api
         /// <summary>
         ///  
         /// </summary>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <returns>Task of ApiResponse (List&lt;Charge&gt;)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<List<Charge>>> ChargesGetAsyncWithHttpInfo()
         {
@@ -1174,7 +2098,7 @@ namespace conekta.io.Api
         /// <summary>
         /// Create a Charge 
         /// </summary>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="body">Charge object</param> 
         /// <returns>Charge</returns>
         public Charge ChargesPost(Charge body)
@@ -1186,7 +2110,7 @@ namespace conekta.io.Api
         /// <summary>
         /// Create a Charge 
         /// </summary>f
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="body">Charge object</param> 
         /// <returns>ApiResponse of Charge</returns>
         public ApiResponse<Charge> ChargesPostWithHttpInfo(Charge body)
@@ -1267,7 +2191,7 @@ namespace conekta.io.Api
         /// <summary>
         /// Create a Charge 
         /// </summary>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="body">Charge object</param>
         /// <returns>Task of Charge</returns>
         public async System.Threading.Tasks.Task<Charge> ChargesPostAsync(Charge body)
@@ -1280,7 +2204,7 @@ namespace conekta.io.Api
         /// <summary>
         /// Create a Charge 
         /// </summary>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="body">Charge object</param>
         /// <returns>Task of ApiResponse (Charge)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Charge>> ChargesPostAsyncWithHttpInfo(Charge body)
@@ -1359,7 +2283,7 @@ namespace conekta.io.Api
         /// <summary>
         ///  
         /// </summary>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="chargeId"></param> 
         /// <returns>Charge</returns>
         public Charge ChargesChargeIdGet(string chargeId)
@@ -1371,7 +2295,7 @@ namespace conekta.io.Api
         /// <summary>
         ///  
         /// </summary>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="chargeId"></param> 
         /// <returns>ApiResponse of Charge</returns>
         public ApiResponse<Charge> ChargesChargeIdGetWithHttpInfo(string chargeId)
@@ -1446,7 +2370,7 @@ namespace conekta.io.Api
         /// <summary>
         ///  
         /// </summary>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="chargeId"></param>
         /// <returns>Task of Charge</returns>
         public async System.Threading.Tasks.Task<Charge> ChargesChargeIdGetAsync(string chargeId)
@@ -1459,7 +2383,7 @@ namespace conekta.io.Api
         /// <summary>
         ///  
         /// </summary>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="chargeId"></param>
         /// <returns>Task of ApiResponse (Charge)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Charge>> ChargesChargeIdGetAsyncWithHttpInfo(string chargeId)
@@ -1532,7 +2456,7 @@ namespace conekta.io.Api
         /// <summary>
         ///  captures an payment
         /// </summary>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="chargeId"></param> 
         /// <returns>Charge</returns>
         public Charge ChargesChargeIdCapturePost(string chargeId)
@@ -1544,7 +2468,7 @@ namespace conekta.io.Api
         /// <summary>
         ///  captures an payment
         /// </summary>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="chargeId"></param> 
         /// <returns>ApiResponse of Charge</returns>
         public ApiResponse<Charge> ChargesChargeIdCapturePostWithHttpInfo(string chargeId)
@@ -1619,7 +2543,7 @@ namespace conekta.io.Api
         /// <summary>
         ///  captures an payment
         /// </summary>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="chargeId"></param>
         /// <returns>Task of Charge</returns>
         public async System.Threading.Tasks.Task<Charge> ChargesChargeIdCapturePostAsync(string chargeId)
@@ -1632,7 +2556,7 @@ namespace conekta.io.Api
         /// <summary>
         ///  captures an payment
         /// </summary>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="chargeId"></param>
         /// <returns>Task of ApiResponse (Charge)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Charge>> ChargesChargeIdCapturePostAsyncWithHttpInfo(string chargeId)
@@ -1705,7 +2629,7 @@ namespace conekta.io.Api
         /// <summary>
         ///  
         /// </summary>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="chargeId"></param> 
         /// <param name="amountQty"></param> 
         /// <returns>Charge</returns>
@@ -1718,7 +2642,7 @@ namespace conekta.io.Api
         /// <summary>
         ///  
         /// </summary>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="chargeId"></param> 
         /// <param name="amountQty"></param> 
         /// <returns>ApiResponse of Charge</returns>
@@ -1801,7 +2725,7 @@ namespace conekta.io.Api
         /// <summary>
         ///  
         /// </summary>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="chargeId"></param>
         /// <param name="amountQty"></param>
         /// <returns>Task of Charge</returns>
@@ -1815,7 +2739,7 @@ namespace conekta.io.Api
         /// <summary>
         ///  
         /// </summary>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="chargeId"></param>
         /// <param name="amountQty"></param>
         /// <returns>Task of ApiResponse (Charge)</returns>
@@ -1896,7 +2820,7 @@ namespace conekta.io.Api
         /// <summary>
         ///  captures an payment
         /// </summary>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="client"></param> 
         /// <returns>Customer</returns>
         public Customer CustomersPost(BaseClient client)
@@ -1908,7 +2832,7 @@ namespace conekta.io.Api
         /// <summary>
         ///  captures an payment
         /// </summary>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="client"></param> 
         /// <returns>ApiResponse of Customer</returns>
         public ApiResponse<Customer> CustomersPostWithHttpInfo(BaseClient client)
@@ -1989,7 +2913,7 @@ namespace conekta.io.Api
         /// <summary>
         ///  captures an payment
         /// </summary>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="client"></param>
         /// <returns>Task of Customer</returns>
         public async System.Threading.Tasks.Task<Customer> CustomersPostAsync(BaseClient client)
@@ -2002,7 +2926,7 @@ namespace conekta.io.Api
         /// <summary>
         ///  captures an payment
         /// </summary>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="client"></param>
         /// <returns>Task of ApiResponse (Customer)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Customer>> CustomersPostAsyncWithHttpInfo(BaseClient client)
@@ -2081,7 +3005,7 @@ namespace conekta.io.Api
         /// <summary>
         ///  captures an payment
         /// </summary>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="subscription"></param> 
         /// <returns>Plan</returns>
         public Plan CustomersPlansPut(Plan subscription)
@@ -2093,7 +3017,7 @@ namespace conekta.io.Api
         /// <summary>
         ///  captures an payment
         /// </summary>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="subscription"></param> 
         /// <returns>ApiResponse of Plan</returns>
         public ApiResponse<Plan> CustomersPlansPutWithHttpInfo(Plan subscription)
@@ -2174,7 +3098,7 @@ namespace conekta.io.Api
         /// <summary>
         ///  captures an payment
         /// </summary>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="subscription"></param>
         /// <returns>Task of Plan</returns>
         public async System.Threading.Tasks.Task<Plan> CustomersPlansPutAsync(Plan subscription)
@@ -2187,7 +3111,7 @@ namespace conekta.io.Api
         /// <summary>
         ///  captures an payment
         /// </summary>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="subscription"></param>
         /// <returns>Task of ApiResponse (Plan)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Plan>> CustomersPlansPutAsyncWithHttpInfo(Plan subscription)
@@ -2266,7 +3190,7 @@ namespace conekta.io.Api
         /// <summary>
         ///  captures an payment
         /// </summary>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="subscription"></param> 
         /// <returns>Plan</returns>
         public Plan CustomersPlansPost(Plan subscription)
@@ -2278,7 +3202,7 @@ namespace conekta.io.Api
         /// <summary>
         ///  captures an payment
         /// </summary>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="subscription"></param> 
         /// <returns>ApiResponse of Plan</returns>
         public ApiResponse<Plan> CustomersPlansPostWithHttpInfo(Plan subscription)
@@ -2359,7 +3283,7 @@ namespace conekta.io.Api
         /// <summary>
         ///  captures an payment
         /// </summary>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="subscription"></param>
         /// <returns>Task of Plan</returns>
         public async System.Threading.Tasks.Task<Plan> CustomersPlansPostAsync(Plan subscription)
@@ -2372,7 +3296,7 @@ namespace conekta.io.Api
         /// <summary>
         ///  captures an payment
         /// </summary>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="subscription"></param>
         /// <returns>Task of ApiResponse (Plan)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Plan>> CustomersPlansPostAsyncWithHttpInfo(Plan subscription)
@@ -2451,7 +3375,7 @@ namespace conekta.io.Api
         /// <summary>
         ///  
         /// </summary>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="planId"></param> 
         /// <returns>Plan</returns>
         public Plan CustomersPlansPlanIdDelete(string planId)
@@ -2463,7 +3387,7 @@ namespace conekta.io.Api
         /// <summary>
         ///  
         /// </summary>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="planId"></param> 
         /// <returns>ApiResponse of Plan</returns>
         public ApiResponse<Plan> CustomersPlansPlanIdDeleteWithHttpInfo(string planId)
@@ -2538,7 +3462,7 @@ namespace conekta.io.Api
         /// <summary>
         ///  
         /// </summary>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="planId"></param>
         /// <returns>Task of Plan</returns>
         public async System.Threading.Tasks.Task<Plan> CustomersPlansPlanIdDeleteAsync(string planId)
@@ -2551,7 +3475,7 @@ namespace conekta.io.Api
         /// <summary>
         ///  
         /// </summary>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="planId"></param>
         /// <returns>Task of ApiResponse (Plan)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Plan>> CustomersPlansPlanIdDeleteAsyncWithHttpInfo(string planId)
@@ -2625,7 +3549,7 @@ namespace conekta.io.Api
         /// <summary>
         ///  captures an payment
         /// </summary>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="customerId"></param> 
         /// <returns>Customer</returns>
         public Customer CustomersCustomerIdPut(string customerId)
@@ -2644,7 +3568,7 @@ namespace conekta.io.Api
         /// <summary>
         ///  captures an payment
         /// </summary>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="customerId"></param> 
         /// <returns>ApiResponse of Customer</returns>
         public ApiResponse<Customer> CustomersCustomerIdGetWithHttpInfo(string customerId)
@@ -2719,7 +3643,7 @@ namespace conekta.io.Api
         /// <summary>
         ///  captures an payment
         /// </summary>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="customerId"></param> 
         /// <returns>ApiResponse of Customer</returns>
         public ApiResponse<Customer> CustomersCustomerIdPutWithHttpInfo(string customerId)
@@ -2794,7 +3718,7 @@ namespace conekta.io.Api
         /// <summary>
         ///  captures an payment
         /// </summary>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="customerId"></param>
         /// <returns>Task of Customer</returns>
         public async System.Threading.Tasks.Task<Customer> CustomersCustomerIdPutAsync(string customerId)
@@ -2807,7 +3731,7 @@ namespace conekta.io.Api
         /// <summary>
         ///  captures an payment
         /// </summary>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="customerId"></param>
         /// <returns>Task of ApiResponse (Customer)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Customer>> CustomersCustomerIdPutAsyncWithHttpInfo(string customerId)
@@ -2880,7 +3804,7 @@ namespace conekta.io.Api
         /// <summary>
         ///  captures an payment
         /// </summary>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="customerId"></param> 
         /// <returns>Customer</returns>
         public Customer CustomersCustomerIdDelete(string customerId)
@@ -2892,7 +3816,7 @@ namespace conekta.io.Api
         /// <summary>
         ///  captures an payment
         /// </summary>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="customerId"></param> 
         /// <returns>ApiResponse of Customer</returns>
         public ApiResponse<Customer> CustomersCustomerIdDeleteWithHttpInfo(string customerId)
@@ -2967,7 +3891,7 @@ namespace conekta.io.Api
         /// <summary>
         ///  captures an payment
         /// </summary>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="customerId"></param>
         /// <returns>Task of Customer</returns>
         public async System.Threading.Tasks.Task<Customer> CustomersCustomerIdDeleteAsync(string customerId)
@@ -2980,7 +3904,7 @@ namespace conekta.io.Api
         /// <summary>
         ///  captures an payment
         /// </summary>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="customerId"></param>
         /// <returns>Task of ApiResponse (Customer)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Customer>> CustomersCustomerIdDeleteAsyncWithHttpInfo(string customerId)
@@ -3053,7 +3977,7 @@ namespace conekta.io.Api
         /// <summary>
         ///  captures an payment
         /// </summary>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="customerId"></param> 
         /// <param name="client"></param> 
         /// <returns>Card</returns>
@@ -3066,7 +3990,7 @@ namespace conekta.io.Api
         /// <summary>
         ///  captures an payment
         /// </summary>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="customerId"></param> 
         /// <param name="client"></param> 
         /// <returns>ApiResponse of Card</returns>
@@ -3153,7 +4077,7 @@ namespace conekta.io.Api
         /// <summary>
         ///  captures an payment
         /// </summary>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="customerId"></param>
         /// <param name="client"></param>
         /// <returns>Task of Card</returns>
@@ -3167,7 +4091,7 @@ namespace conekta.io.Api
         /// <summary>
         ///  captures an payment
         /// </summary>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="customerId"></param>
         /// <param name="client"></param>
         /// <returns>Task of ApiResponse (Card)</returns>
@@ -3250,7 +4174,7 @@ namespace conekta.io.Api
         /// <summary>
         ///  captures an payment
         /// </summary>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="customerId"></param> 
         /// <param name="client"></param> 
         /// <returns>Card</returns>
@@ -3263,7 +4187,7 @@ namespace conekta.io.Api
         /// <summary>
         ///  captures an payment
         /// </summary>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="customerId"></param> 
         /// <param name="client"></param> 
         /// <returns>ApiResponse of Card</returns>
@@ -3350,7 +4274,7 @@ namespace conekta.io.Api
         /// <summary>
         ///  captures an payment
         /// </summary>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="customerId"></param>
         /// <param name="client"></param>
         /// <returns>Task of Card</returns>
@@ -3364,7 +4288,7 @@ namespace conekta.io.Api
         /// <summary>
         ///  captures an payment
         /// </summary>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="customerId"></param>
         /// <param name="client"></param>
         /// <returns>Task of ApiResponse (Card)</returns>
@@ -3447,7 +4371,7 @@ namespace conekta.io.Api
         /// <summary>
         ///  captures an payment
         /// </summary>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="customerId"></param> 
         /// <param name="client"></param> 
         /// <returns>Card</returns>
@@ -3460,7 +4384,7 @@ namespace conekta.io.Api
         /// <summary>
         ///  captures an payment
         /// </summary>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="customerId"></param> 
         /// <param name="client"></param> 
         /// <returns>ApiResponse of Card</returns>
@@ -3547,7 +4471,7 @@ namespace conekta.io.Api
         /// <summary>
         ///  captures an payment
         /// </summary>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="customerId"></param>
         /// <param name="client"></param>
         /// <returns>Task of Card</returns>
@@ -3561,7 +4485,7 @@ namespace conekta.io.Api
         /// <summary>
         ///  captures an payment
         /// </summary>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="customerId"></param>
         /// <param name="client"></param>
         /// <returns>Task of ApiResponse (Card)</returns>
@@ -3644,7 +4568,7 @@ namespace conekta.io.Api
         /// <summary>
         ///  captures an payment
         /// </summary>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="customerId"></param> 
         /// <param name="subscription"></param> 
         /// <returns>Subscription</returns>
@@ -3657,7 +4581,7 @@ namespace conekta.io.Api
         /// <summary>
         ///  captures an payment
         /// </summary>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="customerId"></param> 
         /// <param name="subscription"></param> 
         /// <returns>ApiResponse of Subscription</returns>
@@ -3744,7 +4668,7 @@ namespace conekta.io.Api
         /// <summary>
         ///  captures an payment
         /// </summary>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="customerId"></param>
         /// <param name="subscription"></param>
         /// <returns>Task of Subscription</returns>
@@ -3758,7 +4682,7 @@ namespace conekta.io.Api
         /// <summary>
         ///  captures an payment
         /// </summary>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="customerId"></param>
         /// <param name="subscription"></param>
         /// <returns>Task of ApiResponse (Subscription)</returns>
@@ -3841,7 +4765,7 @@ namespace conekta.io.Api
         /// <summary>
         ///  captures an payment
         /// </summary>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="customerId"></param> 
         /// <returns>Subscription</returns>
         public Subscription CustomersCustomerIdSubscriptionCancelPost(string customerId)
@@ -3853,7 +4777,7 @@ namespace conekta.io.Api
         /// <summary>
         ///  captures an payment
         /// </summary>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="customerId"></param> 
         /// <returns>ApiResponse of Subscription</returns>
         public ApiResponse<Subscription> CustomersCustomerIdSubscriptionCancelPostWithHttpInfo(string customerId)
@@ -3928,7 +4852,7 @@ namespace conekta.io.Api
         /// <summary>
         ///  captures an payment
         /// </summary>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="customerId"></param>
         /// <returns>Task of Subscription</returns>
         public async System.Threading.Tasks.Task<Subscription> CustomersCustomerIdSubscriptionCancelPostAsync(string customerId)
@@ -3941,7 +4865,7 @@ namespace conekta.io.Api
         /// <summary>
         ///  captures an payment
         /// </summary>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="customerId"></param>
         /// <returns>Task of ApiResponse (Subscription)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Subscription>> CustomersCustomerIdSubscriptionCancelPostAsyncWithHttpInfo(string customerId)
@@ -4014,7 +4938,7 @@ namespace conekta.io.Api
         /// <summary>
         ///  captures an payment
         /// </summary>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="customerId"></param> 
         /// <returns>Subscription</returns>
         public Subscription CustomersCustomerIdSubscriptionPausePost(string customerId)
@@ -4026,7 +4950,7 @@ namespace conekta.io.Api
         /// <summary>
         ///  captures an payment
         /// </summary>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="customerId"></param> 
         /// <returns>ApiResponse of Subscription</returns>
         public ApiResponse<Subscription> CustomersCustomerIdSubscriptionPausePostWithHttpInfo(string customerId)
@@ -4100,7 +5024,7 @@ namespace conekta.io.Api
         /// <summary>
         ///  captures an payment
         /// </summary>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="customerId"></param> 
         /// <param name="cardId"></param> 
         /// <returns>Card</returns>
@@ -4113,7 +5037,7 @@ namespace conekta.io.Api
         /// <summary>
         ///  captures an payment
         /// </summary>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="customerId"></param> 
         /// <param name="cardId"></param> 
         /// <returns>ApiResponse of Card</returns>
@@ -4194,7 +5118,7 @@ namespace conekta.io.Api
         /// <summary>
         ///  captures an payment
         /// </summary>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="customerId"></param>
         /// <returns>Task of Subscription</returns>
         public async System.Threading.Tasks.Task<Subscription> CustomersCustomerIdSubscriptionPausePostAsync(string customerId)
@@ -4207,7 +5131,7 @@ namespace conekta.io.Api
         /// <summary>
         ///  captures an payment
         /// </summary>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="customerId"></param>
         /// <returns>Task of ApiResponse (Subscription)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Subscription>> CustomersCustomerIdSubscriptionPausePostAsyncWithHttpInfo(string customerId)
@@ -4280,7 +5204,7 @@ namespace conekta.io.Api
         /// <summary>
         ///  captures an payment
         /// </summary>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="customerId"></param> 
         /// <returns>Subscription</returns>
         public Subscription CustomersCustomerIdSubscriptionResumePost(string customerId)
@@ -4292,7 +5216,7 @@ namespace conekta.io.Api
         /// <summary>
         ///  captures an payment
         /// </summary>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="customerId"></param> 
         /// <returns>ApiResponse of Subscription</returns>
         public ApiResponse<Subscription> CustomersCustomerIdSubscriptionResumePostWithHttpInfo(string customerId)
@@ -4367,7 +5291,7 @@ namespace conekta.io.Api
         /// <summary>
         ///  captures an payment
         /// </summary>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="customerId"></param>
         /// <returns>Task of Subscription</returns>
         public async System.Threading.Tasks.Task<Subscription> CustomersCustomerIdSubscriptionResumePostAsync(string customerId)
@@ -4380,7 +5304,7 @@ namespace conekta.io.Api
         /// <summary>
         ///  captures an payment
         /// </summary>
-        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="customerId"></param>
         /// <returns>Task of ApiResponse (Subscription)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Subscription>> CustomersCustomerIdSubscriptionResumePostAsyncWithHttpInfo(string customerId)

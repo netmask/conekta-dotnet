@@ -1,15 +1,49 @@
 using System;
 using System.Runtime.Serialization;
 using System.Text;
+using System.Threading;
+using conekta.io.Api;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace conekta.io.Resource
 {
+
+
     /// <summary>
     /// </summary>
     [DataContract]
     public class Subscription : IEquatable<Subscription>
     {
+
+        public void Update(JObject updatedSubscription)
+        {
+            var api = new DefaultApi();
+            var subscription = api.CustomersCustomerIdSubscriptionPut(this.Customer.Id,
+                updatedSubscription.ToObject<SubscriptionReference>());
+
+            LoadFrom(subscription);
+        }
+
+        public void Pause()
+        {
+            var api = new DefaultApi();
+            LoadFrom(api.CustomersCustomerIdSubscriptionPausePost(this.Customer.Id));
+        }
+
+        public void Resume()
+        {
+            var api = new DefaultApi();
+            LoadFrom(api.CustomersCustomerIdSubscriptionResumePost(this.Customer.Id));
+        }
+
+
+        public void Cancel()
+        {
+            var api = new DefaultApi();
+            LoadFrom(api.CustomersCustomerIdSubscriptionCancelPost(this.Customer.Id));
+        }
+
         /// <summary>
         ///     Initializes a new instance of the <see cref="Subscription" /> class.
         ///     Initializes a new instance of the <see cref="Subscription" />class.
@@ -33,6 +67,18 @@ namespace conekta.io.Resource
             this.BillingCycleEnd = BillingCycleEnd;
         }
 
+        private void LoadFrom(Subscription subscription)
+        {
+            this.Id = subscription.Id;
+            this.Card = subscription.Card;
+            this.PlanId = subscription.PlanId;
+            this.Status = subscription.Status;
+            this.Start = subscription.Start;
+            this.BillingCycleStart = subscription.BillingCycleStart;
+            this.BillingCycleEnd = subscription.BillingCycleEnd;
+        }
+
+        public Customer Customer { get; set; }
 
         /// <summary>
         ///     Gets or Sets Id

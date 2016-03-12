@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.Remoting.Messaging;
 using System.Runtime.Serialization;
 using System.Text;
+using System.Threading;
 using conekta.io.Api;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -55,6 +56,14 @@ namespace conekta.io.Resource
             this.Cards.Remove(card);
         }
 
+        public Subscription CreateSubscription(JObject subscriptionObject)
+        {
+            var api = new DefaultApi();
+            this.Subscription = api.CustomersCustomerIdSubscriptionPost(this.Id, subscriptionObject.ToObject<SubscriptionReference>());
+            this.Subscription.Customer = this;        
+            return this.Subscription;
+        }
+
 
         /// <sumary>
         ///     Initializes a new instance of the <see cref="Customer" /> class.
@@ -75,7 +84,7 @@ namespace conekta.io.Resource
         public Customer(string Id = null, string _Object = null, string Livemode = null, string CreatedAt = null,
             string Name = null, string Email = null, string Phone = null, string DefaultCard = null,
             BillingAddress BillingAddress = null, BillingAddress ShippingAddress = null,
-            List<Card> Cards = null, List<Subscription> Subscriptions = null, bool Deleted = false)
+            List<Card> Cards = null, Subscription Subscription = null, bool Deleted = false)
         {
             this.Id = Id;
             this._Object = _Object;
@@ -88,7 +97,7 @@ namespace conekta.io.Resource
             this.BillingAddress = BillingAddress;
             this.ShippingAddress = ShippingAddress;
             this.Cards = Cards;
-            this.Subscriptions = Subscriptions;
+            this.Subscription = Subscription;
             this.Deleted = Deleted;
             
             foreach (var card in Cards)
@@ -184,8 +193,8 @@ namespace conekta.io.Resource
         /// <summary>
         ///     Gets or Sets Subscriptions
         /// </summary>
-        [DataMember(Name = "subscriptions", EmitDefaultValue = false)]
-        public List<Subscription> Subscriptions { get; set; }
+        [DataMember(Name = "subscription", EmitDefaultValue = false)]
+        public Subscription Subscription { get; set; }
 
         /// <summary>
         ///     Returns true if Customer instances are equal
@@ -253,11 +262,6 @@ namespace conekta.io.Resource
                     Cards == other.Cards ||
                     Cards != null &&
                     Cards.SequenceEqual(other.Cards)
-                    ) &&
-                (
-                    Subscriptions == other.Subscriptions ||
-                    Subscriptions != null &&
-                    Subscriptions.SequenceEqual(other.Subscriptions)
                     );
         }
 
@@ -280,7 +284,6 @@ namespace conekta.io.Resource
             sb.Append("  BillingAddress: ").Append(BillingAddress).Append("\n");
             sb.Append("  ShippingAddress: ").Append(ShippingAddress).Append("\n");
             sb.Append("  Cards: ").Append(Cards).Append("\n");
-            sb.Append("  Subscriptions: ").Append(Subscriptions).Append("\n");
             sb.Append("  Deleted: ").Append(Deleted).Append("\n");
 
             sb.Append("}\n");
@@ -351,9 +354,6 @@ namespace conekta.io.Resource
 
                 if (Cards != null)
                     hash = hash*59 + Cards.GetHashCode();
-
-                if (Subscriptions != null)
-                    hash = hash*59 + Subscriptions.GetHashCode();
 
                 return hash;
             }

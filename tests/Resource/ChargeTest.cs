@@ -154,5 +154,12 @@ namespace tests.Resource
 
 
 
+        [TestMethod]
+        public void testWhere()
+        {
+            var existingCharge = Charge.Where("{'description':'Stogies'}");
+            Assert.IsTrue(existingCharge.Count > 0);
+        }
+
     }
 }

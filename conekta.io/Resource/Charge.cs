@@ -49,6 +49,14 @@ namespace conekta.io.Resource
             return api.ChargesChargeIdCapturePost(this.Id);
         }
 
+        public static List<Charge> Where(string query)
+        {
+            var api = new DefaultApi();
+            var parsedParams = JsonConvert.DeserializeObject<Dictionary<string, object>>(query);
+
+            return api.ChargesGet();
+        }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Charge" /> class.
         /// Initializes a new instance of the <see cref="Charge" />class.

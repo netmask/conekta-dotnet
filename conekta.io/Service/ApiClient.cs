@@ -76,6 +76,56 @@ namespace conekta.io.Service
 
         // Creates and sets up a RestRequest prior to a call.
         private RestRequest PrepareRequest(
+            string path, Method method, Dictionary<string, List<String>> queryParams, object postBody,
+            Dictionary<string, string> headerParams, Dictionary<string, string> formParams,
+            Dictionary<string, FileParameter> fileParams, Dictionary<string, string> pathParams,
+            string contentType)
+        {
+            var request = new RestRequest(path, method);
+
+            // add path parameter, if any
+            foreach (var param in pathParams)
+                request.AddParameter(param.Key, param.Value, ParameterType.UrlSegment);
+
+            // add header parameter, if any
+            foreach (var param in headerParams)
+                request.AddHeader(param.Key, param.Value);
+
+            // add query parameter, if any
+            foreach (var param in queryParams)
+            {
+                foreach (string s in param.Value)
+                {
+                    request.AddQueryParameter(param.Key, s);
+                }
+            }
+
+
+            // add form parameter, if any
+            foreach (var param in formParams)
+                request.AddParameter(param.Key, param.Value);
+
+            // add file parameter, if any
+            foreach (var param in fileParams)
+                request.AddFile(param.Value.Name, param.Value.Writer, param.Value.FileName, param.Value.ContentType);
+
+            if (postBody != null) // http body (model or byte[]) parameter
+            {
+                if (postBody.GetType() == typeof(string))
+                {
+                    request.AddParameter("application/json", postBody, ParameterType.RequestBody);
+                }
+                else if (postBody.GetType() == typeof(byte[]))
+                {
+                    request.AddParameter(contentType, postBody, ParameterType.RequestBody);
+                }
+            }
+
+            return request;
+        }
+
+        // Creates and sets up a RestRequest prior to a call.
+        private RestRequest PrepareRequest(
             string path, Method method, Dictionary<string, string> queryParams, object postBody,
             Dictionary<string, string> headerParams, Dictionary<string, string> formParams,
             Dictionary<string, FileParameter> fileParams, Dictionary<string, string> pathParams,
@@ -136,6 +186,20 @@ namespace conekta.io.Service
             Dictionary<string, string> headerParams, Dictionary<string, string> formParams,
             Dictionary<string, FileParameter> fileParams, Dictionary<string, string> pathParams,
             string contentType)
+        {
+            var request = PrepareRequest(
+                path, method, queryParams, postBody, headerParams, formParams, fileParams,
+                pathParams, contentType);
+
+            var response = RestClient.Execute(request);
+            return response;
+        }
+
+        public object CallApi(
+    string path, Method method, Dictionary<string, List<String>> queryParams, object postBody,
+    Dictionary<string, string> headerParams, Dictionary<string, string> formParams,
+    Dictionary<string, FileParameter> fileParams, Dictionary<string, string> pathParams,
+    string contentType)
         {
             var request = PrepareRequest(
                 path, method, queryParams, postBody, headerParams, formParams, fileParams,

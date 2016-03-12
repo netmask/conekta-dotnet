@@ -3,6 +3,7 @@ using System.Runtime.Serialization;
 using System.Text;
 using conekta.io.Api;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace conekta.io.Resource
 {
@@ -17,6 +18,14 @@ namespace conekta.io.Resource
             var car =  api.CustomersCustomerIdCardsCardIdDelete(Customer.Id, this.Id);
             Customer.Cards.Remove(this);
             return car;
+        }
+
+        public Card Update(JObject updateCard)
+        {
+            var api = new DefaultApi();
+            var card = api.CustomersCustomerIdCardsCardIdPut(Customer.Id, this.Id, updateCard.ToObject<TokenObject>());
+            this.LoadFromUpdated(card);
+            return card;
         }
 
         /// <summary>
@@ -47,6 +56,18 @@ namespace conekta.io.Resource
             this.Address = Address;
         }
 
+        public void LoadFromUpdated(Card card)
+        {
+            this.Id = card.Id;
+            this._Object = card._Object;
+            this.CreatedAt = card.CreatedAt;
+            this.Name = card.Name;
+            this.Last4 = card.Last4;
+            this.ExpMonth = card.ExpMonth;
+            this.ExpYear = card.ExpYear;
+            this.Active = card.Active;
+            this.Address = card.Address;
+        }
 
 
         public Customer Customer { get; set; }

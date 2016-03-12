@@ -1,7 +1,9 @@
 using System;
 using System.Runtime.Serialization;
 using System.Text;
+using conekta.io.Api;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace conekta.io.Resource
 {
@@ -10,6 +12,26 @@ namespace conekta.io.Resource
     [DataContract]
     public class Plan : IEquatable<Plan>
     {
+
+        public static Plan Create(JObject planParams)
+        {
+            var api  = new DefaultApi();
+            return api.PlansPost(planParams.ToObject<Plan>());
+        }
+
+        public void Update(JObject planParams)
+        {
+            var api = new DefaultApi();
+            LoadFrom(api.PlansPlanIdPut(this.Id, planParams.ToObject<Plan>()));        
+        }
+
+        public void Delete()
+        {
+            var api = new DefaultApi();
+            LoadFrom(api.PlansPlanIdDelete(this.Id));
+        }
+
+
         /// <summary>
         ///     Initializes a new instance of the <see cref="Plan" /> class.
         ///     Initializes a new instance of the <see cref="Plan" />class.
@@ -26,7 +48,7 @@ namespace conekta.io.Resource
         /// <param name="IntervalTotalCount">IntervalTotalCount.</param>
         /// <param name="TrialPeriodDays">TrialPeriodDays.</param>
         public Plan(string Id = null, string _Object = null, bool? Livemode = null, string CreatedAt = null,
-            string Name = null, string Amount = null, string Currency = null, int? Interval = null,
+            string Name = null, string Amount = null, string Currency = null, String Interval = null,
             int? Frequency = null, int? IntervalTotalCount = null, int? TrialPeriodDays = null)
         {
             this.Id = Id;
@@ -40,6 +62,21 @@ namespace conekta.io.Resource
             this.Frequency = Frequency;
             this.IntervalTotalCount = IntervalTotalCount;
             this.TrialPeriodDays = TrialPeriodDays;
+        }
+
+        public void LoadFrom(Plan plan)
+        {
+            this.Id = plan.Id;
+            this._Object = plan._Object;
+            this.Livemode = plan.Livemode;
+            this.CreatedAt = plan.CreatedAt;
+            this.Name = plan.Name;
+            this.Amount = plan.Amount;
+            this.Currency = plan.Currency;
+            this.Interval = plan.Interval;
+            this.Frequency = plan.Frequency;
+            this.IntervalTotalCount = plan.IntervalTotalCount;
+            this.TrialPeriodDays = plan.TrialPeriodDays;
         }
 
 
@@ -89,7 +126,7 @@ namespace conekta.io.Resource
         ///     Gets or Sets Interval
         /// </summary>
         [DataMember(Name = "interval", EmitDefaultValue = false)]
-        public int? Interval { get; set; }
+        public String Interval { get; set; }
 
         /// <summary>
         ///     Gets or Sets Frequency

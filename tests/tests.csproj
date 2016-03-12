@@ -63,6 +63,8 @@
     <Compile Include="Resource\ChargeTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resource\CustomerTest.cs" />
+    <Compile Include="Resource\EventTest.cs" />
+    <Compile Include="Resource\PlanTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\conekta.io\conekta.io.csproj">
